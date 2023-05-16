@@ -10,13 +10,10 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
-/public
 gsmm_do.sql
 mgmm_18_plus.sql
 popular.sql
 server.php
 /storage
-/bootstrap
-/config
 /pmgmmadmin
 /tests
