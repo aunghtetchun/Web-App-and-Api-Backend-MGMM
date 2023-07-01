@@ -92,6 +92,7 @@ class PostController extends Controller
         $post->user_id=auth()->user()->id;
         $post->category_id=$request->category_id;
         $post->updated=$request->updated;
+        $post->new=2;
         $post->size=$request->size;
         $post->version=$request->version;
         $post->requirement=$request->requirement;
@@ -255,6 +256,7 @@ class PostController extends Controller
         $post->developer=$request->developer;
         $post->features=$request->features;
         $post->video=$request->video;
+        $post->new=1;
         $post->description=$request->description;
         if ($request->link1){
             $post->link1=$request->link1;

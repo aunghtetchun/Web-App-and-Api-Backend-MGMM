@@ -35,6 +35,7 @@ class ApiController extends Controller
             ], 500);
         }
     }
+    
     public function popularGames(){
         try {
             $games=Post::withCount(['getViewer'])->orderBy('get_viewer_count','desc')->with('getCategory')->with('categories:post_id,title')->limit(10)->get();
@@ -61,24 +62,63 @@ class ApiController extends Controller
             ], 500);
         }
     }
-    public function allGames(){
+
+    public function allGames(Request $request){
         try{
-            $games=Post::withCount(['getViewer'])->with('categories:post_id,title')->latest()->paginate(10);
-            foreach ($games as $g){
-                $logo = $g->logo;
-                $g->logo = asset("storage/logo/".$logo);
-                $g->photos = array_map(function($photo){
-                    return asset("storage/post/".$photo["name"]);
-                },$g->getPhoto()->get()->toArray());
-                 $g->category=$g->getCategory()->first('title')->title;
-                $g->addHidden(["getPhoto"]);
-            }
+            $title='ဂိမ်းအားလုံး';
+        $games=Post::orderBy('description','asc')->paginate(12);
+        if($request->page >0){
             return response()->json([
                 'result' => 1,
                 'message' => 'success',
-                'games' => $games
-            ], 201);
+                'games' => $games,
+                'title' => $title
+            ], 201); 
+        }
+            // $games=Post::withCount(['getViewer'])->with('categories:post_id,title')->latest()->paginate(10);
+            // foreach ($games as $g){
+            //     $logo = $g->logo;
+            //     $g->logo = asset("storage/logo/".$logo);
+            //     $g->photos = array_map(function($photo){
+            //         return asset("storage/post/".$photo["name"]);
+            //     },$g->getPhoto()->get()->toArray());
+            //      $g->category=$g->getCategory()->first('title')->title;
+            //     $g->addHidden(["getPhoto"]);
+            // }
+            // return response()->json([
+            //     'result' => 1,
+            //     'message' => 'success',
+            //     'games' => $games
+            // ], 201);
 
+        }catch(\Exception $e){
+            return response()->json([
+                'result' => 0,
+                'message' => 'Fail to get all games!',
+                'message_detail' => $e->getMessage(),
+            ], 500);
+        }
+    }
+    public function gameListFilter($id,Request $request){
+        try{
+            if($id==10){
+                return redirect('http://mgmm.pao666.net/game/'.$id);
+            }else{
+            $c_name=Category::where('id',$id)->first()->title;
+            $title=$c_name.' ဂိမ်းများ';
+            // $games=Post::where('category_id',$id)->latest()->paginate(12);
+            $games=Category::find($id)->posts()->paginate(12);
+            if($request->page>0){
+                return response()->json([
+                    'result' => 1,
+                    'message' => 'success',
+                    'games' => $games,
+                    'title' => $title
+                ], 201); 
+            }
+            // return view('games',compact('games','title'));
+            }
+           
         }catch(\Exception $e){
             return response()->json([
                 'result' => 0,

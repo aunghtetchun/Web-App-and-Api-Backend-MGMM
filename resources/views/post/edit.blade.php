@@ -37,17 +37,15 @@
                                         @enderror
                                     </div>
                                     <div class="form-group">
-                                        <label for="tag_id">Category
-
-                                            @foreach(\App\Post_category::where('post_id',$post->id)->get('category_id') as $c)
-                                                <span class="badge px-2 badge-pill badge-primary">{{ $c->getCat->title }}</span>
-                                            @endforeach
-
-                                        </label>
+                                        <label for="tag_id">Category</label>
                                         <select name="tag_id[]" id="tag_id" class="form-control select2" multiple="multiple">
-                                            @foreach(\App\Category::latest()->get() as $c)
-                                                <option value="{{ $c->id }}" >{{ $c->title }}</option>
-                                            @endforeach
+                                            
+                                            @foreach (\App\Category::get() as $option)
+                                            <option value="{{ $option->id }}" 
+                                                {{ \App\Post_category::where('post_id', $post->id)->where('category_id', $option->id)->exists() ? 'selected' : '' }}>
+                                                {{ $option->title }}
+                                            </option>
+                                        @endforeach
                                         </select>
 {{--                                        {{ $post->category_id == $c->id ? "selected":"" }}--}}
                                         @error('tag_id')

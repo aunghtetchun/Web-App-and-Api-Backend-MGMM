@@ -16,13 +16,13 @@ class ApiKey
      */
     public function handle($request, Closure $next)
     {
-        if(!isset($_SERVER['HTTP_X_HARDIK'])){
-            return Response::json(array('error'=>"Please don't try to access this page"));
-        }
+        // if(!isset($_SERVER['HTTP_X_HARDIK'])){
+        //     return Response::json(array('error'=>"Please don't try to access this page"));
+        // }
 
-        if($_SERVER['HTTP_X_HARDIK'] != 'A109944105439hc'){
-            return Response::json(array('error'=>'wrong admin'));
-        }
+        // if($_SERVER['HTTP_X_HARDIK'] != 'A109944105439hc'){
+        //     return Response::json(array('error'=>'wrong admin'));
+        // }
 
         return $next($request);
     }

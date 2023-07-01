@@ -63,7 +63,7 @@ class SoftwareController extends Controller
     {
         $request->validate([
             "name" => "required",
-            "slug" => "required",
+            // "slug" => "required",
             "type" => "required",
             "logo" => "required",
             "updated" => "required",
@@ -81,7 +81,7 @@ class SoftwareController extends Controller
         $software->name_2=$request->name_2;
         $software->name_3=$request->name_3;
         $software->name=$request->name;
-        $software->slug=$request->slug;
+        // $software->slug=$request->slug;
         $software->type=$request->type;
         $software->user_id=auth()->user()->id;
         $software->updated=$request->updated;
@@ -180,7 +180,7 @@ class SoftwareController extends Controller
         }else{
         $request->validate([
             "name" => "required",
-            "slug" => "required",
+            // "slug" => "required",
             "type" => "required",
 //            "logo" => "required",
             "updated" => "required",
@@ -199,7 +199,7 @@ class SoftwareController extends Controller
         $software->name_2=$request->name_2;
         $software->name_3=$request->name_3;
         $software->name=$request->name;
-        $software->slug=$request->slug;
+        // $software->slug=$request->slug;
         $software->type=$request->type;
         $software->updated=$request->updated;
         $software->size=$request->size;
@@ -251,18 +251,16 @@ class SoftwareController extends Controller
             return redirect()->route("software.index")->with("toast","ဒီဂိမ်းကိုသင်တင်ခဲ့တာမဟုတ်တဲ့အတွက်ဖျက်လို့မရနိုင်ပါဘူး");
         }else{
 
-        $old=Photo::where('post_id',$software->id)->get();
-        unlink(storage_path('/app/public/slogo/'.$software->logo));
+        $old=Photo::where('software_id',$software->id)->get();
+        // unlink(storage_path('/app/public/slogo/'.$software->logo));
 //        unlink(storage_path('/app/public/thumbnail/'.$software->logo));
 
         foreach ($old as $o){
             unlink(storage_path('/app/public/software/'.$o->name));
 //            unlink(storage_path('/app/public/thumbnail/'.$o->name));
         }
-        Photo::where('post_id',$software->id)->delete();
-        Rating::where('post_id',$software->id)->delete();
-        Comment::where('post_id',$software->id)->delete();
-        Viewer::where('post_id',$software->id)->delete();
+        Photo::where('software_id',$software->id)->delete();
+        Comment::where('software_id',$software->id)->delete();
         $software->delete();
         return redirect()->route("software.index")->with("toast","Software Delete Successful");
     }

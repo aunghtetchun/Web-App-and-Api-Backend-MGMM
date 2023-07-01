@@ -35,7 +35,7 @@
                                         </small>
                                         @enderror
                                     </div>
-                                    <div class="form-group">
+                                    {{-- <div class="form-group">
                                         <label for="slug">Slug</label>
                                         <input required type="text" class="form-control @error('slug') is-invalid @enderror" name="slug" id="slug" value="{{old('slug')}}" placeholder="Software Url">
                                         @error('slug')
@@ -43,7 +43,7 @@
                                             {{ $message }}
                                         </small>
                                         @enderror
-                                    </div>
+                                    </div> --}}
                                     <div class="form-group">
                                         <label for="type">Software Type</label>
                                         <input required type="text" class="form-control @error('type') is-invalid @enderror" name="type" id="type" value="Offline" placeholder="Software Type">

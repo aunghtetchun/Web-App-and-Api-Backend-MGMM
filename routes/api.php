@@ -27,7 +27,9 @@ use Illuminate\Http\Request;
 //     Route::get('/v1/popular', array('uses' => 'ApiController@popularGames'));
 //     Route::get('/v1/news', array('uses' => 'ApiController@news'));
 //     Route::get('/v1/news/{id}', array('uses' => 'ApiController@new'));
-//     Route::get('/v1/games', array('uses' => 'ApiController@allGames'));
+    Route::get('/v1/game', array('uses' => 'ApiController@allGames'));
+Route::get('/v1/game/{id}','ApiController@gameListFilter');
+
 //     Route::get('/v1/category', array('uses' => 'ApiController@category'));
 //     Route::get('/v1/category/{id}', array('uses' => 'ApiController@byCategory'));
 //     Route::get('/v1/ads','ApiController@ads');

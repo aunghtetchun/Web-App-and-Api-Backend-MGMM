@@ -67,7 +67,7 @@ Route::get('/request_game/create','GameController@createRequest')->name('request
 Route::post('/request_game','GameController@storeRequest')->name('requestGame.storeRequest');
 Route::post('/add_rating','GameController@storeRating')->name('addRating.storeRating');
 Route::post('/comment_game','GameController@storeComment')->name('commentGame.storeComment');
-Route::get('/ad_game','GameController@adGame')->name('adGame');
+Route::get('/our_team','GameController@adGame')->name('adGame');
 
 Route::get('/show_comment/{id}','GameController@showComment')->name('post.showComment');
 Route::get('/game','GameController@gameList')->name('game.gameList');
@@ -84,3 +84,4 @@ Route::get('/softwares','GameController@softwareList')->name('software.softwareL
 Route::get('/softwares/{slug}','GameController@singleSoftwareList')->name('software.singleSoftwareList');
 Route::get('/software_search','GameController@softwareSearch')->name('software.softwareSearch');
 Route::get('/download_software/{slug}','GameController@softwareDownload')->name('software.download');
+Route::get('/sitemap','GameController@generateSitemap');

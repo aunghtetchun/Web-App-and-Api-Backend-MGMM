@@ -11,7 +11,8 @@ use App\RequestApp;
 use App\Suggest;
 use App\Viewer;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
+use Response;
 class GameController extends Controller
 {
     public function popular(){
@@ -24,9 +25,9 @@ class GameController extends Controller
         // return $posts;
         return view('welcome',compact('posts'));
     }
-    public function gameList(){
-        $title='All Games List';
-        $games=Post::orderBy('description','desc')->paginate(12);
+    public function gameList(Request $request){
+        $title='ဂိမ်းအားလုံး';
+        $games=Post::orderBy('description','asc')->paginate(9);
         return view('games',compact('games','title'));
     }
     public function gameListFilter($id){
@@ -34,7 +35,7 @@ class GameController extends Controller
             return redirect('http://mgmm.pao666.net/game/'.$id);
         }else{
         $c_name=Category::where('id',$id)->first()->title;
-        $title=$c_name.' Games List';
+        $title=$c_name.' ဂိမ်းများ';
         // $games=Post::where('category_id',$id)->latest()->paginate(12);
         $games=Category::find($id)->posts()->paginate(12);
         return view('games',compact('games','title'));
@@ -122,9 +123,9 @@ class GameController extends Controller
     {
 //        return $request;
         $request->validate([
-            "app_name" => "required|max:50",
-            "username" => "required|max:50",
-            "phone" => "required|max:50",
+            "app_name" => "required|max:25",
+            "username" => "required|max:25",
+            "phone" => "required|max:25",
             "description" => "required|max:50",
            "playstore_link" => "max:50",
         ]);
@@ -162,7 +163,7 @@ class GameController extends Controller
     {
         $request->validate([
             "post_id"=>"required|numeric",
-            "comment"=>"required|max:120",
+            "comment"=>"required|max:40",
         ]);
         $comment=new Comment();
         $comment->post_id=$request->post_id;
@@ -189,7 +190,7 @@ class GameController extends Controller
     }
 
             public function softwareList(){
-                $title='All Software List';
+                $title='Software အားလုံး';
                 $softwares=Software::orderBy('description','asc')->paginate(12);
                 return view('softwares',compact('softwares','title'));
             }
@@ -221,5 +222,8 @@ class GameController extends Controller
                     ->paginate(17);
                 return view('softwares',compact('softwares','search','title'));
             }
-        
+        public function generateSitemap(){
+            $urls = DB::table('posts')->pluck('slug');
+            return Response::view('sitemap', compact('urls'))->header('Content-Type', 'text/xml');        
+        }
 }

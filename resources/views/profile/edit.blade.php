@@ -137,139 +137,11 @@
                         </form>
                     @endslot
                 @endcomponent
-                <!-- @component("component.card")
-                    @slot('icon') <i class="mr-1 feather-mail text-primary"></i> @endslot
-                    @slot('title') Change Version @endslot
-                    @slot('button')  @endslot
-                    @slot('body')
-                        <form action="{{ route('gVersion.store') }}" method="post">
-                            @csrf
-                            <div class="form-group">
-                                <label for="version">
-                                    <i class="mr-1 feather-star"></i>
-                                    App Version
-                                </label>
-                                @if(\App\GVersion::count() > 0)
-                                    <input type="text" name="version" class="form-control" value="{{ \App\GVersion::latest()->first()->version }}">
-                                @else
-                                    <input type="text" name="version" class="form-control" value="{{ old('version') }}">
-                                @endif
-                                @error("version")
-                                <small class="font-weight-bold text-danger">{{ $message }}</small>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label for="link">
-                                    <i class="mr-1 feather-link"></i>
-                                    App Link
-                                </label>
-                                @if(\App\GVersion::count() > 0)
-                                    <input type="text" name="link" class="form-control" value="{{ \App\GVersion::latest()->first()->link }}">
-                                @else
-                                    <input type="text" name="link" class="form-control" value="{{ old('link') }}">
-                                @endif
-                                @error("link")
-                                <small class="font-weight-bold text-danger">{{ $message }}</small>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label for="link">
-                                    <i class="mr-1 feather-link"></i>
-                                    Ads Code
-                                </label>
-                                @if(\App\GVersion::count() > 0)
-                                    <input type="text" name="code" class="form-control" value="{{ \App\GVersion::latest()->first()->code }}">
-                                @else
-                                    <input type="text" name="code" class="form-control" value="{{ old('code') }}">
-                                @endif
-                                @error("code")
-                                <small class="font-weight-bold text-danger">{{ $message }}</small>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label for="link">
-                                    <i class="mr-1 feather-link"></i>
-                                    Video Ads
-                                </label>
-                                @if(\App\GVersion::count() > 0)
-                                    <input type="text" name="video_one" class="form-control" value="{{ \App\GVersion::latest()->first()->video_one }}">
-                                @else
-                                    <input type="text" name="video_one" class="form-control" value="{{ old('video_one') }}">
-                                @endif
-                                @error("video_one")
-                                <small class="font-weight-bold text-danger">{{ $message }}</small>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label for="link">
-                                    <i class="mr-1 feather-link"></i>
-                                    Video Ads
-                                </label>
-                                @if(\App\GVersion::count() > 0)
-                                    <input type="text" name="video_two" class="form-control" value="{{ \App\GVersion::latest()->first()->video_two }}">
-                                @else
-                                    <input type="text" name="video_two" class="form-control" value="{{ old('video_two') }}">
-                                @endif
-                                @error("video_two")
-                                <small class="font-weight-bold text-danger">{{ $message }}</small>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label for="link">
-                                    <i class="mr-1 feather-link"></i>
-                                    Banner Ads
-                                </label>
-                                @if(\App\GVersion::count() > 0)
-                                    <input type="text" name="banner_one" class="form-control" value="{{ \App\GVersion::latest()->first()->banner_one }}">
-                                @else
-                                    <input type="text" name="banner_one" class="form-control" value="{{ old('banner_one') }}">
-                                @endif
-                                @error("banner_one")
-                                <small class="font-weight-bold text-danger">{{ $message }}</small>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label for="link">
-                                    <i class="mr-1 feather-link"></i>
-                                    Banner Ads
-                                </label>
-                                @if(\App\GVersion::count() > 0)
-                                    <input type="text" name="banner_two" class="form-control" value="{{ \App\GVersion::latest()->first()->banner_two }}">
-                                @else
-                                    <input type="text" name="banner_two" class="form-control" value="{{ old('banner_two') }}">
-                                @endif
-                                @error("banner_two")
-                                <small class="font-weight-bold text-danger">{{ $message }}</small>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label for="password">
-                                    <i class="mr-1 feather-lock"></i>
-                                    Password
-                                </label>
-                                    <input type="text" name="password" class="form-control">
-                                @error("password")
-                                <small class="font-weight-bold text-danger">{{ $message }}</small>
-                                @enderror
-                            </div>
-
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="custom-control custom-switch">
-                                    <input type="checkbox" class="custom-control-input" id="customSwitch4" required>
-                                    <label class="custom-control-label" for="customSwitch4">I'm Sure</label>
-                                </div>
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="mr-1 feather-refresh-ccw"></i>
-                                    Change Version
-                                </button>
-                            </div>
-                        </form>
-                    @endslot
-                @endcomponent -->
+             
 
         </div>
 
-        <!-- <div class="col-12 col-md-4">
+         <div class="col-12 col-md-4">
             @component("component.card")
                 @slot('icon') <i class="mr-1 feather-lock text-primary"></i> @endslot
                 @slot('title') Change Password @endslot
@@ -321,7 +193,7 @@
                     </form>
                 @endslot
             @endcomponent
-        </div> -->
+        </div> 
 
     </div>
 @endsection
