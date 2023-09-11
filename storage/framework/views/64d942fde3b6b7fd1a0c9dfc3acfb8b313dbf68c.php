@@ -43,6 +43,24 @@ if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>
                                     </div>
                                     <div class="form-group">
+                                        <label for="keywords">Search Keywords</label>
+                                        <textarea rows="9" required class="form-control <?php if ($errors->has('keywords')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('keywords'); ?> is-invalid <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>" name="keywords"  id="keywords"><?php echo e(old('keywords')); ?></textarea>
+                                        <?php if ($errors->has('keywords')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('keywords'); ?>
+                                        <small class="invalid-feedback font-weight-bold" role="alert">
+                                            <?php echo e($message); ?>
+
+                                        </small>
+                                        <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>
+                                    </div>
+                                    <div class="form-group">
                                         <label for="type">Game Type</label>
                                         <input required type="text" class="form-control <?php if ($errors->has('type')) :
 if (isset($message)) { $messageCache = $message; }

@@ -85,7 +85,7 @@ endif; ?>
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('playstore_link'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>" name="playstore_link" id="playstore_link" value="<?php echo e(old('playstore_link')); ?>" placeholder="Game Link">
+endif; ?>" name="playstore_link" id="playstore_link" value="<?php echo e(old('playstore_link')); ?>" placeholder="ဖုန်းအမျိုးအစား">
                        <?php if ($errors->has('playstore_link')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('playstore_link'); ?>

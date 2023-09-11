@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use DB;
 use App\Post;
 use App\Viewer;
+use App\Message;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -17,6 +18,22 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+    }
+
+    public function userList(){
+        return view('user.index');
+    }
+    public function messageList(){
+        return view('user.message');
+    }
+
+    public function sendMessage(Request $request){
+        $message=new Message();
+        $message->user_id=$request->user_id;
+        $message->message=$request->message;
+        $message->save();
+        return redirect()->back()->with("toast","Message Send Successful");
+
     }
 public function testing(){
     $data= DB::select("SELECT users.*, COALESCE(SUM(viewers.count),0) as total_viewers FROM users 

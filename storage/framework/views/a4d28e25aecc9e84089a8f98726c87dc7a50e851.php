@@ -10,7 +10,7 @@
                     enctype="multipart/form-data">
                     <?php echo csrf_field(); ?>
                     <div class="form-row align-items-end justify-content-center">
-                        <div class="form-group mb-2 col-10 col-md-5 pr-0">
+                        <div class="form-group mb-2 col-10 col-md-5 pr-0" >
                             
                             <input required type="text"
                                 class="form-control rounded-0 <?php if ($errors->has('name')) :
@@ -20,7 +20,7 @@ if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>" name="name"
                                 id="name" value="<?php echo e(old('name')); ?>" placeholder="ဂိမ်းရှာရန်... ">
                         </div>
-                        <div class="form-group col-2 mb-2 col-md-2 text-left  px-0">
+                        <div class="form-group col-2 mb-2 col-md-2 text-left  px-0" onclick="showElement()">
                             <button type="submit" class="btn rounded-0 w-100 btn-primary px-3"> <i
                                     class="feather-search"></i></button>
                         </div>
@@ -40,12 +40,12 @@ endif; ?>" name="name"
                                 <div class="col-3 pl-2 pr-2 py-2 rounded">
                                     <img class="p-0  px-0 pt-0 cropped" src="<?php echo e(asset('/storage/logo/' . $post->logo)); ?>"
                                         alt="Card image cap"
-                                        onclick="location.href='<?php echo e(route('game.singleGameList', $post->slug)); ?>'"
+                                        onclick="window.open('<?php echo e(route('game.singleGameList', $post->slug)); ?>','_blank')"
                                         style="border-radius:0.5rem!important; ">
                                 </div>
 
                                 <div class="col-9 p-0 pr-1 text-center card-body pt-1 "
-                                    onclick="location.href='<?php echo e(route('game.singleGameList', $post->slug)); ?>'"
+                                    onclick="window.open('<?php echo e(route('game.singleGameList', $post->slug)); ?>','_blank')"
                                     style="padding: 13px">
                                     <p class="card-title w-100 mb-0"
                                         style="font-size: 14px; color:black; overflow:hidden; height:20px;">
@@ -72,7 +72,15 @@ endif; ?>" name="name"
                                     <p class="text-mutedd mb-0" style="font-size: 11px;"> Version : <?php echo e($post->version); ?>
 
                                     </p>
-                                    <p class="card-text text-muted mb-2 " style="font-size: 12px;"><?php echo e($post->size); ?></p>
+                                    <p class="card-text text-muted mb-2 " style="font-size: 12px;"><?php echo e($post->size); ?> 
+                                        <?php if(strpos(strtolower($post->type), 'offline') !== false && strpos(strtolower($post->type), 'online') !== false): ?>
+                                        , <span class="text-danger font-weight-bold"> Offline</span>
+                                         <span class="text-success font-weight-bold"> & Online</span>
+                                    <?php elseif(strpos(strtolower($post->type), 'online') !== false): ?>
+                                        , <span class="text-success font-weight-bold"> Online</span>
+                                    <?php elseif(strpos(strtolower($post->type), 'offline') !== false): ?>
+                                        , <span class="text-danger font-weight-bold"> Offline</span>
+                                    <?php endif; ?>  </p>
 
                                 </div>
 
@@ -125,7 +133,6 @@ endif; ?>" name="name"
             if(oldUrl==''){
                 oldUrl=nextPageUrl;
             }
-
             // let originalUrl = "http://modgamesmm.com/game?page=2";
             let modifiedUrl = oldUrl.replace("http://modgamesmm.com/game", "https://modgamesmm.com/api/v1/game");
             entries.forEach(entry => {
@@ -152,6 +159,18 @@ endif; ?>" name="name"
                             
 
                             games.data.forEach(function(item) {
+                                let offline=item.type.toLowerCase().includes('offline');
+                                let online=item.type.toLowerCase().includes('online');
+                                if (online && offline) {
+                                    var gameType=', <span class="text-danger font-weight-bold"> Offline </span><span class="text-success font-weight-bold"> & Online</span>';
+                                }else if(online){
+                                    var gameType=', <span class="text-success font-weight-bold"> Online</span>';
+                                }
+                                else if(offline){
+                                    var gameType=', <span class="text-danger font-weight-bold"> Offline</span>';
+                                }else{
+                                    var gameType='';
+                                }
 
                                 var htmlContent = `    <div class="col-12 px-1 px-md-2 px-lg-3 col-md-6 col-lg-4 my-2">
                                 <div class="col-12 rounded p-0 bg-light d-flex flex-wrap align-items-center game_card"
@@ -173,7 +192,7 @@ endif; ?>" name="name"
                                             style="top: 30%;"><i class="feather-eye"></i> ${item.count}</h6>
                                         ${generateBadges(item.new)}
                                         <p class="text-mutedd mb-0" style="font-size: 11px;"> Version : ${item.version}</p>
-                                        <p class="card-text text-muted mb-2" style="font-size: 12px;">${item.size}</p>
+                                        <p class="card-text text-muted mb-2" style="font-size: 12px;">${item.size}  ${gameType}</p>
                                     </div>
                                 </div>
                             </div>

@@ -44,7 +44,7 @@
 
             <?php $__env->startComponent('component.nav-item-count'); ?>
                 <?php $__env->slot('icon'); ?>
-                    <i class="feather-list"></i>
+                    <i class="feather-server"></i>
                 <?php $__env->endSlot(); ?>
                 <?php $__env->slot('name'); ?>
                     Game List
@@ -80,7 +80,7 @@
 
             <?php $__env->startComponent('component.nav-item-count'); ?>
                 <?php $__env->slot('icon'); ?>
-                    <i class="feather-list"></i>
+                    <i class="feather-server"></i>
                 <?php $__env->endSlot(); ?>
                 <?php $__env->slot('name'); ?>
                     Software List
@@ -91,6 +91,79 @@
                 <?php $__env->endSlot(); ?>
                 <?php $__env->slot('count'); ?>
                     <?php echo e(\App\Software::count()); ?>
+
+                <?php $__env->endSlot(); ?>
+            <?php echo $__env->renderComponent(); ?>
+            <?php $__env->startComponent('component.nav-spacer'); ?>
+            <?php echo $__env->renderComponent(); ?>
+            <?php $__env->startComponent('component.nav-title'); ?>
+            Adult Management
+        <?php echo $__env->renderComponent(); ?>
+
+        <?php $__env->startComponent('component.nav-item'); ?>
+            <?php $__env->slot('icon'); ?>
+                <i class="fas fa-gamepad"></i>
+            <?php $__env->endSlot(); ?>
+            <?php $__env->slot('name'); ?>
+                Add Adult
+            <?php $__env->endSlot(); ?>
+            <?php $__env->slot('link'); ?>
+                <?php echo e(route('adult.create')); ?>
+
+            <?php $__env->endSlot(); ?>
+        <?php echo $__env->renderComponent(); ?>
+
+        <?php $__env->startComponent('component.nav-item-count'); ?>
+            <?php $__env->slot('icon'); ?>
+                <i class="feather-server"></i>
+            <?php $__env->endSlot(); ?>
+            <?php $__env->slot('name'); ?>
+                Adult List
+            <?php $__env->endSlot(); ?>
+            <?php $__env->slot('link'); ?>
+                <?php echo e(route('adult.index')); ?>
+
+            <?php $__env->endSlot(); ?>
+            <?php $__env->slot('count'); ?>
+                <?php echo e(\App\Adult::count()); ?>
+
+            <?php $__env->endSlot(); ?>
+        <?php echo $__env->renderComponent(); ?>
+        <?php $__env->startComponent('component.nav-spacer'); ?>
+        <?php echo $__env->renderComponent(); ?>
+            <?php $__env->startComponent('component.nav-title'); ?>
+            User Management
+        <?php echo $__env->renderComponent(); ?>
+
+            <?php $__env->startComponent('component.nav-item-count'); ?>
+                <?php $__env->slot('icon'); ?>
+                    <i class="feather-users"></i>
+                <?php $__env->endSlot(); ?>
+                <?php $__env->slot('name'); ?>
+                    Users List
+                <?php $__env->endSlot(); ?>
+                <?php $__env->slot('link'); ?>
+                    <?php echo e(route('user.userList')); ?>
+
+                <?php $__env->endSlot(); ?>
+                <?php $__env->slot('count'); ?>
+                    <?php echo e(\App\User::count()); ?>
+
+                <?php $__env->endSlot(); ?>
+            <?php echo $__env->renderComponent(); ?>
+            <?php $__env->startComponent('component.nav-item-count'); ?>
+                <?php $__env->slot('icon'); ?>
+                    <i class="feather-message-square"></i>
+                <?php $__env->endSlot(); ?>
+                <?php $__env->slot('name'); ?>
+                    Message List
+                <?php $__env->endSlot(); ?>
+                <?php $__env->slot('link'); ?>
+                    <?php echo e(route('user.messageList')); ?>
+
+                <?php $__env->endSlot(); ?>
+                <?php $__env->slot('count'); ?>
+                    <?php echo e(\App\Message::count()); ?>
 
                 <?php $__env->endSlot(); ?>
             <?php echo $__env->renderComponent(); ?>
@@ -117,64 +190,64 @@
         <?php $__env->slot('icon'); ?>
             <i class="fas fa-network-wired"></i>
         <?php $__env->endSlot(); ?>
-                        <?php $__env->slot('name'); ?>
+                                <?php $__env->slot('name'); ?>
             Add Popular
         <?php $__env->endSlot(); ?>
-                        <?php $__env->slot('link'); ?>
+                                <?php $__env->slot('link'); ?>
             <?php echo e(route('popular.create')); ?>
 
         <?php $__env->endSlot(); ?>
     <?php echo $__env->renderComponent(); ?>
 
-                <?php $__env->startComponent('component.nav-item-count'); ?>
+                    <?php $__env->startComponent('component.nav-item-count'); ?>
         <?php $__env->slot('icon'); ?>
             <i class="feather-list"></i>
         <?php $__env->endSlot(); ?>
-                        <?php $__env->slot('name'); ?>
+                                <?php $__env->slot('name'); ?>
             Popular List
         <?php $__env->endSlot(); ?>
-                        <?php $__env->slot('link'); ?>
+                                <?php $__env->slot('link'); ?>
             <?php echo e(route('popular.index')); ?>
 
         <?php $__env->endSlot(); ?>
-                        <?php $__env->slot('count'); ?>
+                                <?php $__env->slot('count'); ?>
             <?php echo e(\App\Popular::count()); ?>
 
         <?php $__env->endSlot(); ?>
     <?php echo $__env->renderComponent(); ?>
 
-                <?php $__env->startComponent('component.nav-spacer'); ?>
+                    <?php $__env->startComponent('component.nav-spacer'); ?>
     <?php echo $__env->renderComponent(); ?>
 
-                <?php $__env->startComponent('component.nav-title'); ?>
+                    <?php $__env->startComponent('component.nav-title'); ?>
         Ads Management
     <?php echo $__env->renderComponent(); ?>
 
-                <?php $__env->startComponent('component.nav-item'); ?>
+                    <?php $__env->startComponent('component.nav-item'); ?>
         <?php $__env->slot('icon'); ?>
             <i class="feather-gift"></i>
         <?php $__env->endSlot(); ?>
-                        <?php $__env->slot('name'); ?>
+                                <?php $__env->slot('name'); ?>
             Add Ads
         <?php $__env->endSlot(); ?>
-                        <?php $__env->slot('link'); ?>
+                                <?php $__env->slot('link'); ?>
             <?php echo e(route('ads.create')); ?>
 
         <?php $__env->endSlot(); ?>
     <?php echo $__env->renderComponent(); ?>
 
-                <?php $__env->startComponent('component.nav-item-count'); ?>
+                    <?php $__env->startComponent('component.nav-item-count'); ?>
         <?php $__env->slot('icon'); ?>
             <i class="feather-list"></i>
         <?php $__env->endSlot(); ?>
-                        <?php $__env->slot('name'); ?>
+                                <?php $__env->slot('name'); ?>
             Ads List
         <?php $__env->endSlot(); ?>
-                        <?php $__env->slot('link'); ?>
+                                <?php $__env->slot('link'); ?>
             <?php echo e(route('ads.index')); ?>
 
         <?php $__env->endSlot(); ?>
-                        <?php $__env->slot('count'); ?>
+                                <?php $__env->slot('count'); ?>
             <?php echo e(\App\Ads::count()); ?>
 
         <?php $__env->endSlot(); ?>
@@ -184,12 +257,28 @@
             <?php echo $__env->renderComponent(); ?>
 
             <?php $__env->startComponent('component.nav-title'); ?>
-                Request Management
+                Other Management
+            <?php echo $__env->renderComponent(); ?>
+            <?php $__env->startComponent('component.nav-item-count'); ?>
+                <?php $__env->slot('icon'); ?>
+                    <i class="feather-search"></i>
+                <?php $__env->endSlot(); ?>
+                <?php $__env->slot('name'); ?>
+                    Search List
+                <?php $__env->endSlot(); ?>
+                <?php $__env->slot('link'); ?>
+                    <?php echo e(route('viewer.index')); ?>
+
+                <?php $__env->endSlot(); ?>
+                <?php $__env->slot('count'); ?>
+                    <?php echo e(\App\SearchKeyword::count()); ?>
+
+                <?php $__env->endSlot(); ?>
             <?php echo $__env->renderComponent(); ?>
 
             <?php $__env->startComponent('component.nav-item-count'); ?>
                 <?php $__env->slot('icon'); ?>
-                    <i class="feather-list"></i>
+                    <i class="feather-send"></i>
                 <?php $__env->endSlot(); ?>
                 <?php $__env->slot('name'); ?>
                     Request List
@@ -205,7 +294,7 @@
             <?php echo $__env->renderComponent(); ?>
             <?php $__env->startComponent('component.nav-item-count'); ?>
                 <?php $__env->slot('icon'); ?>
-                    <i class="feather-list"></i>
+                    <i class="feather-edit-2"></i>
                 <?php $__env->endSlot(); ?>
                 <?php $__env->slot('name'); ?>
                     Comment List
@@ -215,33 +304,31 @@
 
                 <?php $__env->endSlot(); ?>
                 <?php $__env->slot('count'); ?>
-                    <?php echo e(\App\Comment::count()); ?>
+                    <?php echo e(\App\Comment::withTrashed()->count()); ?>
 
                 <?php $__env->endSlot(); ?>
             <?php echo $__env->renderComponent(); ?>
-            
-
-            
-
-            
-            
-            
-            
-            
-            
-
-            <?php $__env->startComponent('component.nav-item'); ?>
+            <?php $__env->startComponent('component.nav-item-count'); ?>
                 <?php $__env->slot('icon'); ?>
-                    <i class="feather-list"></i>
+                    <i class="feather-link"></i>
                 <?php $__env->endSlot(); ?>
                 <?php $__env->slot('name'); ?>
-                    Popular List
+                    Broken Links
                 <?php $__env->endSlot(); ?>
                 <?php $__env->slot('link'); ?>
-                    <?php echo e(route('viewer.index')); ?>
+                    <?php echo e(route('suggest.index')); ?>
+
+                <?php $__env->endSlot(); ?>
+                <?php $__env->slot('count'); ?>
+                    <?php echo e(\App\Suggest::count()); ?>
 
                 <?php $__env->endSlot(); ?>
             <?php echo $__env->renderComponent(); ?>
+            
+
+            
+
+
 
             <?php $__env->startComponent('component.nav-spacer'); ?>
             <?php echo $__env->renderComponent(); ?>

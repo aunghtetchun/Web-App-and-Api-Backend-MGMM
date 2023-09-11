@@ -46,9 +46,9 @@
                             <tr>
                                 <th scope="col">#</th>
                                 <th  scope="col">ဂိမ်းနာမည်</th>
-                                <th scope="col">ဂိမ်းတင်သူ</th>
-                                <th scope="col">Version</th>
+                                <th scope="col">Keywords</th>
                                 <th scope="col">Link</th>
+                                <th scope="col">ဂိမ်းတင်သူ</th>
                                 <th scope="col">Controls</th>
                             </tr>
                             </thead>
@@ -66,10 +66,8 @@
                                         </div>
 
                                     </td>
-                                    <td>
-                                        <p class="badge badge-pill badge-success p-2"><?php echo e($p->getUser->name); ?></p>
-                                    </td>
-                                    <td><?php echo e($p->version); ?></td>
+                                   
+                                    <td><?php echo e($p->keywords); ?></td>
                                     <td class="justify-content-around">
                                         <?php if(isset($p->link1)): ?>
                                             <?php if(str_contains($p->link1, 'drive.google')): ?>
@@ -106,9 +104,12 @@
                                         <?php endif; ?>
                                     </td>
                                     <td>
+                                        <p class="badge badge-pill badge-success p-2"><?php echo e($p->getUser->name); ?></p>
+                                    </td>
+                                    <td>
                                         <div class="d-inline-flex">
-                                            <?php if($p->user_id==auth()->user()->id || auth()->user()->id==3): ?>
-                                            <a target="" href="<?php echo e(route('post.edit',$p->id)); ?>" class="btn mr-2 btn-outline-warning btn-sm">
+                                            <?php if($p->user_id==auth()->user()->id || auth()->user()->role==1): ?>
+                                            <a target="_blank" href="<?php echo e(route('post.edit',$p->id)); ?>" class="btn mr-2 btn-outline-warning btn-sm">
                                                 <i class="feather-edit"></i>
                                             </a>
                                             <form action="<?php echo e(route('post.destroy',$p->id)); ?>"  method="post">

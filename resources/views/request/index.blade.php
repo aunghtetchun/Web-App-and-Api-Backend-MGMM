@@ -26,8 +26,9 @@
                                 <th scope="col">App Name</th>
                                 <th scope="col">Username</th>
                                 <th scope="col">Phone</th>
-                                <th scope="col">Playstore Link</th>
+                                <th scope="col">ဖုန်းအမျိုးအစား</th>
                                 <th scope="col">Controls</th>
+				<th scope="col">Created_at </th>
                             </tr>
                             </thead>
                             <tbody>
@@ -37,7 +38,7 @@
                                     <td>{{ $rq->username }}</td>
                                     <td>{{ $rq->phone }}</td>
                                     <td>
-                                        <a href="{{ $rq->playstore_link }}" class="btn btn-outline-primary btn-sm mt-1"> <i class="feather-link"></i> Click</a>
+                                       {{ $rq->playstore_link }}
                                     <td class="control-group d-flex" style="vertical-align: middle; text-align: center">
                                         <form class="d-inline-block" action="{{ route('request_app.destroy',$rq->id) }}"  method="post">
                                             @csrf
@@ -50,6 +51,7 @@
                                             <i class="feather-eye"></i>
                                         </a>
                                     </td>
+				<td>{{$rq->created_at}}</td>
                                 </tr>
                             @endforeach
                             </tbody>

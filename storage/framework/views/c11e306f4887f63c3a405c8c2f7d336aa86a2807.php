@@ -44,6 +44,24 @@ if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>
                                     </div>
                                     <div class="form-group">
+                                        <label for="keywords">Search Keywords</label>
+                                        <input required type="text" class="form-control <?php if ($errors->has('keywords')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('keywords'); ?> is-invalid <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>" name="keywords" id="keywords" value="<?php echo e($post->keywords); ?>" placeholder="search keywords">
+                                        <?php if ($errors->has('keywords')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('keywords'); ?>
+                                        <small class="invalid-feedback font-weight-bold" role="alert">
+                                            <?php echo e($message); ?>
+
+                                        </small>
+                                        <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>
+                                    </div>
+                                    <div class="form-group">
                                         <label for="tag_id">Category</label>
                                         <select name="tag_id[]" id="tag_id" class="form-control select2" multiple="multiple">
                                             

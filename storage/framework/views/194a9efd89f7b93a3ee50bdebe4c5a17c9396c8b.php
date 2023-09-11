@@ -24,8 +24,9 @@
                                 <th scope="col">App Name</th>
                                 <th scope="col">Username</th>
                                 <th scope="col">Phone</th>
-                                <th scope="col">Playstore Link</th>
+                                <th scope="col">ဖုန်းအမျိုးအစား</th>
                                 <th scope="col">Controls</th>
+				<th scope="col">Created_at </th>
                             </tr>
                             </thead>
                             <tbody>
@@ -35,7 +36,8 @@
                                     <td><?php echo e($rq->username); ?></td>
                                     <td><?php echo e($rq->phone); ?></td>
                                     <td>
-                                        <a href="<?php echo e($rq->playstore_link); ?>" class="btn btn-outline-primary btn-sm mt-1"> <i class="feather-link"></i> Click</a>
+                                       <?php echo e($rq->playstore_link); ?>
+
                                     <td class="control-group d-flex" style="vertical-align: middle; text-align: center">
                                         <form class="d-inline-block" action="<?php echo e(route('request_app.destroy',$rq->id)); ?>"  method="post">
                                             <?php echo csrf_field(); ?>
@@ -48,6 +50,7 @@
                                             <i class="feather-eye"></i>
                                         </a>
                                     </td>
+				<td><?php echo e($rq->created_at); ?></td>
                                 </tr>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </tbody>

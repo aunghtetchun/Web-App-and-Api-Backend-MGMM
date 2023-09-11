@@ -2,39 +2,32 @@
 
 use Illuminate\Http\Request;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
-
-//Route::middleware('auth:api')->get('/user', function (Request $request) {
-//    return $request->user();
-//});
-
-//Route::get('/v1/game/{key}', [
-//    'middleware' => 'App\Http\Middleware\ApiKey',
-//    function () {
-//        return view('welcome');
-//    }]);
-
-// Route::group(['middleware' => ['ApiKey']], function () {
-//     Route::get('/v1/popular', array('uses' => 'ApiController@popularGames'));
-//     Route::get('/v1/news', array('uses' => 'ApiController@news'));
-//     Route::get('/v1/news/{id}', array('uses' => 'ApiController@new'));
     Route::get('/v1/game', array('uses' => 'ApiController@allGames'));
-Route::get('/v1/game/{id}','ApiController@gameListFilter');
+    Route::get('/v1/game/{id}','ApiController@gameListFilter');
+    Route::post('/signup', 'AuthController@signup');
+    Route::post('/login', 'AuthController@login');
+    Route::group(['middleware' => 'auth:api'], function() {
+        Route::get('logout', 'AuthController@logout');
+        Route::get('getuser', 'ApiController@getUser');
+        Route::post('/save-game', 'ApiController@saveGame');
+        Route::post('/report-game', 'ApiController@reportGame');
+        Route::post('/comment-game', 'ApiController@saveGameComment');
+        Route::delete('/delete-save-game', 'ApiController@deleteGame');
+    });
+    Route::get('category', 'ApiController@getCategory');
+    Route::get('/games', 'ApiController@getAllGames');
+    Route::get('/games/category/{id}', 'ApiController@getAllGamesByCategory');
+    Route::get('/games/popular', 'ApiController@getPopularGames');
+    Route::get('/games/details/{slug}', 'ApiController@getGameDetails');
+    Route::get('/games/related/{id}', 'ApiController@getRelatedGames');
+    Route::get('/games/search/{search_value}', 'ApiController@searchGames');
+    Route::post('/request-game', 'ApiController@requestGame');
 
-//     Route::get('/v1/category', array('uses' => 'ApiController@category'));
-//     Route::get('/v1/category/{id}', array('uses' => 'ApiController@byCategory'));
-//     Route::get('/v1/ads','ApiController@ads');
-//     Route::post('/v1/request', array('uses' => 'ApiController@requestGame'));
-//     Route::get('/v1/version', array('uses' => 'ApiController@version'));
-//     Route::get('/v1/related/{id}', array('uses' => 'ApiController@relatedGames'));
-//     Route::post('/v1/game_search','ApiController@search');
-// });
+    Route::get('/softwares', 'ApiController@getAllSoftwares');
+    Route::get('/softwares/details/{slug}', 'ApiController@getSoftwareDetails');
+    Route::get('/softwares/search/{search_value}', 'ApiController@searchSoftwares');
+   
+    Route::get('/adults', 'ApiController@getAllAdults');
+    Route::get('/adults/details/{slug}', 'ApiController@getAdultDetails');
+    Route::get('/adults/search/{search_value}', 'ApiController@searchAdults');
+   

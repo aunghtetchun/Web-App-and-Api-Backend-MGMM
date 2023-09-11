@@ -9,7 +9,8 @@ use App\Software;
 use App\Rating;
 use App\RequestApp;
 use App\Suggest;
-use App\Viewer;
+use App\Adult;
+use App\SearchKeyword;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Response;
@@ -76,12 +77,15 @@ class GameController extends Controller
     public function gameSearch(Request $request){
         $name=$request->name;
         $request->validate([
-            "name" => "required|max:25",
+            "name" => "required|max:35",
         ]);
+        $saveKey=new SearchKeyword();
+        $saveKey->keywords=$name;
+        $saveKey->save();
         $search='aa';
         $title='Search Result For - '.$name;
         $games=Post::query()
-            ->where('name', 'LIKE', "%{$name}%")
+            ->where('keywords', 'LIKE', "%{$name}%")
             
             ->paginate(17);
         return view('games',compact('games','search','title'));
@@ -94,25 +98,25 @@ class GameController extends Controller
     }
 
   
-    public function storeSuggest(Request $request)
-    {
-//        return $request;
-        $request->validate([
-            "name" => "required|max:50",
-            "phone" => "required|max:30",
-            "email" => "required|max:50",
-            "description" => "required|unique:suggests|max:2000",
-//            "playstore_link" => "required",
-        ]);
-        $finish='မင်္ဂလာပါ '.$request->name .'ရေ....သင့်အကြံပြုချက်အတွက် ကျေးဇူးအထူးတင်ပါတယ်ခင်ဗျာ....';
-        $suggest=new Suggest();
-        $suggest->name=$request->name;
-        $suggest->email=$request->email;
-        $suggest->phone=$request->phone;
-        $suggest->description=$request->description;
-        $suggest->save();
-        return view('suggest.create',compact('finish'));
-    }
+//     public function storeSuggest(Request $request)
+//     {
+// //        return $request;
+//         $request->validate([
+//             "name" => "required|max:50",
+//             "phone" => "required|max:30",
+//             "email" => "required|max:50",
+//             "description" => "required|unique:suggests|max:2000",
+// //            "playstore_link" => "required",
+//         ]);
+//         $finish='မင်္ဂလာပါ '.$request->name .'ရေ....သင့်အကြံပြုချက်အတွက် ကျေးဇူးအထူးတင်ပါတယ်ခင်ဗျာ....';
+//         $suggest=new Suggest();
+//         $suggest->name=$request->name;
+//         $suggest->email=$request->email;
+//         $suggest->phone=$request->phone;
+//         $suggest->description=$request->description;
+//         $suggest->save();
+//         return view('suggest.create',compact('finish'));
+//     }
 
     public function createSuggest()
     {
@@ -178,15 +182,49 @@ class GameController extends Controller
         return view('ad_accept');
     }
 
-    public function download($id)
+    public function downloadGame($slug)
     {
-        $game=Post::find($id);
-            return view('download',compact('game'));
+        $game=Post::where('slug',$slug)->first();
+        return view('download',compact('game'));
+    }
+    public function download($slug, $name, $type)
+    {
+        if ($type == 'game') {
+            $post = Post::where('slug', $slug)->first();
+            $link = $post ? $post->{$name} : null;
+        } else if ($type == 'software') {
+            $software = Software::where('slug', $slug)->first();
+            $link = $software ? $software->{$name} : null;
+        }else if($type == 'adult') {
+            $adult = Adult::where('slug', $slug)->first();
+            $link = $adult ? $adult->{$name} : null;
+        }
+    
+        if ($link) {
+            return redirect($link);
+        } else {
+            return abort(404);
+        }
+    }
+    
+    public function reportBrokenLink(Request $request){
+        $finish='မင်္ဂလာပါ ၂၄ နာရီအတွင်းမှာ ယခုလင့်ကို ပြန်ပြင်ပေးသွားမှာဖြစ်ပါတယ်....';
+        $suggest=new Suggest();
+        if ($request->post_type == 'game' && Suggest::where('post_id', $request->post_id)->doesntExist()){            
+            $suggest->type="game";
+            $suggest->post_id = $request->post_id;
+            $suggest->save();
+        }elseif ($request->post_type == 'software' && Suggest::where('software_id', $request->post_id)->doesntExist()){
+            $suggest->type="software";
+            $suggest->software_id = $request->post_id;
+            $suggest->save();
+        }
+        return redirect()->back()->with('finish', $finish);
     }
     public function softwareDownload($slug)
     {
         $game=Software::where('slug',$slug)->first();
-            return view('download',compact('game'));
+        return view('download',compact('game'));
     }
 
             public function softwareList(){

@@ -77,7 +77,7 @@ class RequestAppController extends Controller
     public function destroy(RequestApp $requestApp)
     {
         $requestApp->delete();
-        return redirect()->route("request.index")->with("toast","Request Delete Successful");
+        return redirect()->back()->with("toast","Request Delete Successful");
 
     }
 }

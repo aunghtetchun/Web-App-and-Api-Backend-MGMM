@@ -1,0 +1,42 @@
+[2023-07-23 08:20:58] laravel.EMERGENCY: Unable to create configured logger. Using emergency logger. {"exception":"[object] (InvalidArgumentException(code: 0): Log [] is not defined. at /var/www/modgamesmm/vendor/laravel/framework/src/Illuminate/Log/LogManager.php:168)
+[stacktrace]
+#0 /var/www/modgamesmm/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(102): Illuminate\\Log\\LogManager->resolve()
+#1 /var/www/modgamesmm/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(90): Illuminate\\Log\\LogManager->get()
+#2 /var/www/modgamesmm/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(500): Illuminate\\Log\\LogManager->driver()
+#3 /var/www/modgamesmm/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(118): Illuminate\\Log\\LogManager->error()
+#4 /var/www/modgamesmm/app/Exceptions/Handler.php(37): Illuminate\\Foundation\\Exceptions\\Handler->report()
+#5 /var/www/modgamesmm/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(378): App\\Exceptions\\Handler->report()
+#6 /var/www/modgamesmm/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(143): Illuminate\\Foundation\\Console\\Kernel->reportException()
+#7 /var/www/modgamesmm/artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle()
+#8 {main}
+"} 
+[2023-07-23 08:20:58] laravel.ERROR: syntax error, unexpected 'allowed_headers' (T_STRING), expecting ']' {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalThrowableError(code: 0): syntax error, unexpected 'allowed_headers' (T_STRING), expecting ']' at /var/www/modgamesmm/config/cors.php:44)
+[stacktrace]
+#0 /var/www/modgamesmm/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/LoadConfiguration.php(39): Illuminate\\Foundation\\Bootstrap\\LoadConfiguration->loadConfigurationFiles()
+#1 /var/www/modgamesmm/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(210): Illuminate\\Foundation\\Bootstrap\\LoadConfiguration->bootstrap()
+#2 /var/www/modgamesmm/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(322): Illuminate\\Foundation\\Application->bootstrapWith()
+#3 /var/www/modgamesmm/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(131): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#4 /var/www/modgamesmm/artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle()
+#5 {main}
+"} 
+[2023-07-23 08:22:49] laravel.EMERGENCY: Unable to create configured logger. Using emergency logger. {"exception":"[object] (InvalidArgumentException(code: 0): Log [] is not defined. at /var/www/modgamesmm/vendor/laravel/framework/src/Illuminate/Log/LogManager.php:168)
+[stacktrace]
+#0 /var/www/modgamesmm/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(102): Illuminate\\Log\\LogManager->resolve()
+#1 /var/www/modgamesmm/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(90): Illuminate\\Log\\LogManager->get()
+#2 /var/www/modgamesmm/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(500): Illuminate\\Log\\LogManager->driver()
+#3 /var/www/modgamesmm/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(118): Illuminate\\Log\\LogManager->error()
+#4 /var/www/modgamesmm/app/Exceptions/Handler.php(37): Illuminate\\Foundation\\Exceptions\\Handler->report()
+#5 /var/www/modgamesmm/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(378): App\\Exceptions\\Handler->report()
+#6 /var/www/modgamesmm/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(143): Illuminate\\Foundation\\Console\\Kernel->reportException()
+#7 /var/www/modgamesmm/artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle()
+#8 {main}
+"} 
+[2023-07-23 08:22:49] laravel.ERROR: syntax error, unexpected 'allowed_headers' (T_STRING), expecting ']' {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalThrowableError(code: 0): syntax error, unexpected 'allowed_headers' (T_STRING), expecting ']' at /var/www/modgamesmm/config/cors.php:44)
+[stacktrace]
+#0 /var/www/modgamesmm/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/LoadConfiguration.php(39): Illuminate\\Foundation\\Bootstrap\\LoadConfiguration->loadConfigurationFiles()
+#1 /var/www/modgamesmm/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(210): Illuminate\\Foundation\\Bootstrap\\LoadConfiguration->bootstrap()
+#2 /var/www/modgamesmm/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(322): Illuminate\\Foundation\\Application->bootstrapWith()
+#3 /var/www/modgamesmm/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(131): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#4 /var/www/modgamesmm/artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle()
+#5 {main}
+"} 

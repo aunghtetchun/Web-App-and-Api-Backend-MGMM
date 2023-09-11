@@ -81,6 +81,8 @@ class PostController extends Controller
             "developer" => "required",
             "features" => "required",
             "description" => "required",
+            "keywords" => "required",
+            "images" => "required",
 //            "images.*" => 'image|mimes:jpeg,png,jpg,gif,svg'
         ]);
         $post=new Post();
@@ -94,6 +96,7 @@ class PostController extends Controller
         $post->updated=$request->updated;
         $post->new=2;
         $post->size=$request->size;
+        $post->keywords=strtolower($request->keywords.', '.$request->name);
         $post->version=$request->version;
         $post->requirement=$request->requirement;
         $post->developer=$request->developer;
@@ -213,9 +216,7 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        if (auth()->user()->id !==3 && $post->user_id != auth()->user()->id  ){
-        return redirect()->route("post.index")->with("toast","ဒီဂိမ်းကိုသင်တင်ခဲ့တာမဟုတ်တဲ့အတွက်ပြင်လို့မရနိုင်ပါဘူး");
-        }else{
+        if (auth()->user()->role =1 || $post->user_id = auth()->user()->id  ){
         $request->validate([
             "name" => "required",
             "type" => "required",
@@ -227,7 +228,7 @@ class PostController extends Controller
             "requirement" => "required",
             "developer" => "required",
             "features" => "required",
-//            "link1" => "required",
+           "keywords" => "required",
             "description" => "required",
 //            "images.*" => 'image|mimes:jpeg,png,jpg,gif,svg'
         ]);
@@ -248,6 +249,7 @@ class PostController extends Controller
         $post->name_3=$request->name_3;
         $post->name=$request->name;
         $post->type=$request->type;
+        $post->keywords=strtolower($request->keywords);
         $post->category_id=$request->category_id;
         $post->updated=$request->updated;
         $post->size=$request->size;
@@ -292,6 +294,8 @@ class PostController extends Controller
         $post->update();
 
         return redirect()->route("post.index")->with("toast","Game Update Successful");
+    }else{
+        return redirect()->route("post.index")->with("toast","ဒီဂိမ်းကိုသင်တင်ခဲ့တာမဟုတ်တဲ့အတွက်ပြင်လို့မရနိုင်ပါဘူး");
     }
     }
 
@@ -303,9 +307,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        if (auth()->user()->id !==3 && $post->user_id != auth()->user()->id){
-            return redirect()->route("post.index")->with("toast","ဒီဂိမ်းကိုသင်တင်ခဲ့တာမဟုတ်တဲ့အတွက်ဖျက်လို့မရနိုင်ပါဘူး");
-        }else{
+        if (auth()->user()->role =1 || $post->user_id = auth()->user()->id  ){     
 
         $old=Photo::where('post_id',$post->id)->get();
         unlink(storage_path('/app/public/logo/'.$post->logo));
@@ -321,6 +323,8 @@ class PostController extends Controller
         Viewer::where('post_id',$post->id)->delete();
         $post->delete();
         return redirect()->route("post.index")->with("toast","Game Delete Successful");
+    }else{
+        return redirect()->route("post.index")->with("toast","ဒီဂိမ်းကိုသင်တင်ခဲ့တာမဟုတ်တဲ့အတွက်ဖျက်လို့မရနိုင်ပါဘူး");
     }
 
     }

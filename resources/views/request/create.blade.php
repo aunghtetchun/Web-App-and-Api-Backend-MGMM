@@ -52,7 +52,7 @@
                    </div>
                    <div class="form-group">
                        <label for="playstore_link">Game Playstore Link or Post link</label>
-                       <input required type="text" class="form-control @error('playstore_link') is-invalid @enderror" name="playstore_link" id="playstore_link" value="{{old('playstore_link')}}" placeholder="Game Link">
+                       <input required type="text" class="form-control @error('playstore_link') is-invalid @enderror" name="playstore_link" id="playstore_link" value="{{old('playstore_link')}}" placeholder="ဖုန်းအမျိုးအစား">
                        @error('playstore_link')
                        <small class="invalid-feedback font-weight-bold" role="alert">
                            {{ $message }}

@@ -685,13 +685,38 @@
  -1px -1px 0 #c6c23f; */
         }
 
-        /* .lgtext {
+        .telegram-button {
+            background-color: #0088cc;
+            color: #fff;
+            border-color: #0088cc;
+        }
 
-            text-shadow: -1px 1px 0 #41ba45,
-                1px 1px 0 #c63d2b,
-                1px -1px 0 #42afac,
-                -1px -1px 0 #c6c23f;
-        } */
+        .telegram-button:hover {
+            background-color: #0077b3;
+            border-color: #0077b3;
+            color: #fff;
+        }
+
+        #goToTopBtn {
+            display: none;
+            position: fixed;
+            bottom: 90px;
+            right: 7px;
+            z-index: 9999;
+        }
+        .loadData{
+            position: fixed;
+            left: 0;
+            display: flex;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            background: #0c0000ef;
+            align-items: center;
+            justify-content: center;
+        }
+
+     
     </style>
 
 
@@ -699,16 +724,13 @@
 </head>
 
 <body id="dscroll">
-    {{-- <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T9HJVHZ" height="0" width="0"
-            style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) --> --}}
 
 
     <div class="container-fluid" style="background:  #f7efe9">
         <div class="row">
             {{--        <div class="se-pre-con"></div> --}}
-            <div class="col-12 p-0 position-sticky  d-none d-md-block" style=" top: 0; z-index: 16; background: #a81d1d">
+            <div class="col-12 p-0 position-sticky  d-none d-md-block"
+                style=" top: 0; z-index: 16; background: #a81d1d">
                 <div class="container ">
                     <div class="row">
                         <div class="col-12 p-0 nbar ">
@@ -722,17 +744,7 @@
                                 <span class="h3 lgtext pl-2 text-white gsmm"
                                     onclick="location.href='{{ route('game.gameList') }}'"
                                     style="cursor: pointer">MGMM</span>
-                                {{-- <a class="btn eighteen btn-success px-3 ml-md-2 rounded-0 py-2 font-weight-bold"
-                                    style="font-size:19px; position: fixed;
-    
-    width: 100%;
-    bottom: 0;
-    right: 0;
-    background: #a81d1d !important;"
-                                    href="{{ route('game.gameListFilter', 10) }}">
-                                    <i class="fas fa-arrow-right mr-1"></i> 18+ Games List <i
-                                        class="fas ml-1 fa-arrow-left"></i>
-                                </a> --}}
+                                
                                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                                     aria-expanded="false" aria-label="Toggle navigation">
@@ -752,7 +764,7 @@
                                                 Games
                                             </a>
                                             <!-- Modal -->
-                                            
+
 
                                         </li>
                                         <li class="nav-item">
@@ -763,9 +775,6 @@
                                             <a class="nav-link "
                                                 href="{{ route('requestGame.createRequest') }}">ဂိမ်းတောင်းရန်</a>
                                         </li>
-                                        <!-- <li class="nav-item">
-                                        <a class="nav-link " href="{{ route('suggestGame.createSuggest') }}">Suggest Website</a>
-                                    </li> -->
                                         <li class="nav-item">
                                             <a class="nav-link " href="{{ route('adGame') }}">Our Team</a>
                                         </li>
@@ -778,72 +787,77 @@
 
             </div>
             <div class="modal fade " id="catmodal" tabindex="-1" role="dialog" style="z-index:3000;"
-                                                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                <div class="modal-dialog vh-100 modal-dialog-scrollable" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModalLongTitle">
-                                                                ဂိမ်းအမျိုးအစားအလိုက်ကြည့်ရန်
-                                                            </h5>
-                                                            <button type="button" class="close"
-                                                                data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body" style="z-index:3000;">
-                                                            <div
-                                                                class="d-flex flex-wrap justify-content-center align-items-center">
-                                                                <a class="gcat col-12 btn btn-outline-primary px-3 py-2 "
-                                                                    href="{{ route('game.gameList') }}"
-                                                                    role="button">ဂိမ်းအားလုံး <span class="gcount">
-                                                                        ({{ App\Post::count() }} ဂိမ်း) </span></a>
-                                                                @foreach (\App\Category::all() as $cat)
-                                                                    <a style=" font-size:14px;"
-                                                                        class="gcat mt-1 col-6 btn btn-outline-primary px-2 py-2 "
-                                                                        href="{{ route('game.gameListFilter', $cat->id) }}"
-                                                                        role="button">{{ $cat->title }} <span
-                                                                            class="gcount">({{ App\Category::find($cat->id)->posts()->count() }})</span>
-                                                                    </a>
-                                                                @endforeach
-                                                            </div>
-                                                        </div>
+                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog vh-100 modal-dialog-scrollable" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">
+                                ဂိမ်းအမျိုးအစားအလိုက်ကြည့်ရန်
+                            </h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body" style="z-index:3000;">
+                            <div class="d-flex flex-wrap justify-content-center align-items-center">
+                                <a class="gcat col-12 btn btn-outline-primary px-3 py-2 "
+                                    href="{{ route('game.gameList') }}" role="button">ဂိမ်းအားလုံး <span
+                                        class="gcount">
+                                        ({{ App\Post::count() }} ဂိမ်း) </span></a>
+                                @foreach (\App\Category::all() as $cat)
+                                    <a style=" font-size:14px;"
+                                        class="gcat mt-1 col-6 btn btn-outline-primary  py-3 "
+                                        href="{{ route('game.gameListFilter', $cat->id) }}"
+                                        role="button">{{ $cat->title }} <span
+                                            class="gcount">({{ App\Category::find($cat->id)->posts()->count() }})</span>
+                                    </a>
+                                @endforeach
+                            </div>
+                        </div>
 
-                                                    </div>
-                                                </div>
-                                            </div>
+                    </div>
+                </div>
+            </div>
             <div class="fb-quote"></div>
             @yield('download')
             <!-- <div class="main_bg_photo"></div> -->
             <div class="content_bod col-12 p-0 bg-light  pb-5" style="min-height: 65vh">
                 @yield('content')
                 <div id="yourElementId" class=" pb-5"></div>
-                <div class="col-12 d-md-none d-block pb-2 pt-3 shadow shadow-lg d-flex justify-content-center align-items-center mobile_footer" style="position: fixed;
+                <div class="col-12 d-md-none d-block pb-2 pt-3 shadow shadow-lg d-flex justify-content-center align-items-center mobile_footer"
+                    style="position: fixed;
                 width: 100%;
                 z-index:2900;
                 bottom: 0;
                 right: 0;
                 background: #ffffff !important;
                 color: black !important;">
-                    <div onclick="window.location.href = '{{ url('/') }}';" class="col @if(Request::url() == url('/')) text-primary @else text-dark @endif px-0 text-center">
+                    <div onclick="window.location.href = '{{ url('/') }}';"
+                        class="col @if (Request::url() == url('/')) text-primary @else text-dark @endif px-0 text-center">
                         <i class="feather-home"></i><br>
                         <span style="font-size: 14px">Home</span>
                     </div>
-                    <div class="col @if(preg_match('/\/game\/\d+/', Request::url())) text-primary @else text-dark @endif px-0 text-center">
+                    <div data-toggle="modal" data-target="#catmodal" 
+                        class="col @if (preg_match('/\/game\/\d+/', Request::url())) text-primary @else text-dark @endif px-0 text-center">
                         <i class="feather-grid"></i><br>
-                        <a style="font-size: 14px" class=" @if(preg_match('/\/game\/\d+/', Request::url())) text-primary @else text-dark @endif href="#" id="navbarDropdown" role="button"
-                                                data-toggle="modal" data-target="#catmodal">
-                                                Games
+                        <a style="font-size: 14px"
+                            class=" @if (preg_match('/\/game\/\d+/', Request::url())) text-primary @else text-dark @endif" href="#"
+                            id="navbarDropdown" role="button" data-toggle="modal" data-target="#catmodal">
+                            Games
                         </a>
                     </div>
-                    <div onclick="window.location.href = '{{ url('/softwares') }}';" class="col @if(Request::url() == url('/softwares')) text-primary @else text-dark @endif px-0 text-center">
+                    <div onclick="window.location.href = '{{ url('/softwares') }}';"
+                        class="col @if (Request::url() == url('/softwares')) text-primary @else text-dark @endif px-0 text-center">
                         <i class="feather-cpu"></i><br>
                         <span style="font-size: 14px">Software</span>
                     </div>
-                    <div onclick="window.location.href = '{{ route('requestGame.createRequest') }}';" class="col @if(Request::url() == url('/request_game/create')) text-primary @else text-dark @endif px-0 text-center">
+                    <div onclick="window.location.href = '{{ route('requestGame.createRequest') }}';"
+                        class="col @if (Request::url() == url('/request_game/create')) text-primary @else text-dark @endif px-0 text-center">
                         <i class="feather-box"></i><br>
                         <span style="font-size: 14px">Request</span>
                     </div>
-                    <div onclick="window.location.href = '{{ route('adGame') }}';" class="col @if(Request::url() == url('/our_team')) text-primary @else text-dark @endif px-0 text-center">
+                    <div onclick="window.location.href = '{{ route('adGame') }}';"
+                        class="col @if (Request::url() == url('/our_team')) text-primary @else text-dark @endif px-0 text-center">
                         <i class="feather-users"></i><br>
                         <a style="font-size: 14px">Team</a>
                     </div>
@@ -851,11 +865,20 @@
                 </div>
                 <div class="footer mt-4 d-none d-md-block text-dark text-center pb-3 py-3 font-weight-bolder "
                     style="background-color: rgba(255,255,255,0.8); line-height: 30px">
-                    <span class="px-3" >Copyright ©2021 All rights reserved | This Website is
+                    <span class="px-3">Copyright ©2021 All rights reserved | This Website is
                         Created by <a href="https://www.facebook.com/aunghtetch0n">Aung Htet Chon</a>
                     </span>
                 </div>
+                <button id="goToTopBtn" class="btn btn-primary px-2" onclick="goToTop()"><i
+                        class="feather-arrow-up"></i></button>
             </div>
+            <div class="text-center col-12 loadData d-none" id="loadData" >
+                {{-- <div class="spinner-border text-success" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div> --}}
+                <i class="feather-settings fa-spin h1 text-primary"></i>
+            </div>
+
 
         </div>
     </div>
@@ -863,18 +886,31 @@
 
     <!-- Scripts -->
     <script src="{{ asset('dashboard/js/jquery.js') }}"></script>
-    <!-- <script src="https://code.jquery.com/jquery-migrate-3.4.1.min.js"
-        integrity="sha256-UnTxHm+zKuDPLfufgEMnKGXDl6fEIjtM+n1Q6lL73ok=" crossorigin="anonymous"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
         integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
     </script>
     <script src="{{ asset('dashboard/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('dashboard/vendor/venobox/venobox.min.js') }}"></script>
+    <script src="{{ asset('dashboard/vendor/slick/slick.min.js') }}"></script>
+    @yield('foot')
     <script src="{{ asset('dashboard/vendor/font-awesome/fontawesome.min.js') }}"></script>
     <script src="{{ asset('dashboard/vendor/font-awesome/all.min.js') }}"></script>
-    <script src="{{ asset('dashboard/vendor/slick/slick.min.js') }}"></script>
+   
 
     <script>
+        function showElement() {
+            var element = document.getElementById("loadData");
+            element.classList.remove("d-none");
+        }
+
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 100) { // Change 100 to the desired scroll threshold
+                $('#goToTopBtn').fadeIn();
+            } else {
+                $('#goToTopBtn').fadeOut();
+            }
+        });
+
         $(window).load(function() {
             // Animate loader off screen
             $(".se-pre-con").fadeOut(500);
@@ -887,9 +923,15 @@
                 numeratio: true, // default: false
                 infinigall: true, // default: false
             });
+
         });
+        
+        function goToTop() {
+            $('html, body').animate({
+                scrollTop: 0
+            }, 'slow');
+        }
     </script>
-    @yield('foot')
 
 
 </body>

@@ -26,3 +26,4 @@ class Software extends Model
         'id','count','rating','slug'
     ];
 }
+

@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Viewer;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\DB;
+use App\SearchKeyword;
+
 class ViewerController extends Controller
 {
     public function __construct()
@@ -18,7 +21,15 @@ class ViewerController extends Controller
      */
     public function index()
     {
-        return view('viewer.viewer');
+$searchKeywords = SearchKeyword::select('id','keywords', 'created_at')
+    ->whereIn('created_at', function ($query) {
+        $query->select(DB::raw('MAX(created_at)'))
+            ->from('search_keywords')
+            ->groupBy('keywords');
+    })
+    ->orderByDesc('created_at')
+    ->get();
+        return view('viewer.viewer',compact('searchKeywords'));
     }
 
     /**

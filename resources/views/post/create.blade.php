@@ -36,6 +36,15 @@
                                         @enderror
                                     </div>
                                     <div class="form-group">
+                                        <label for="keywords">Search Keywords</label>
+                                        <textarea rows="9" required class="form-control @error('keywords') is-invalid @enderror" name="keywords"  id="keywords">{{old('keywords')}}</textarea>
+                                        @error('keywords')
+                                        <small class="invalid-feedback font-weight-bold" role="alert">
+                                            {{ $message }}
+                                        </small>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
                                         <label for="type">Game Type</label>
                                         <input required type="text" class="form-control @error('type') is-invalid @enderror" name="type" id="type" value="Offline" placeholder="Game Type">
                                         @error('type')

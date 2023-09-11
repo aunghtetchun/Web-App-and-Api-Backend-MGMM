@@ -43,7 +43,7 @@
 
             @component('component.nav-item-count')
                 @slot('icon')
-                    <i class="feather-list"></i>
+                    <i class="feather-server"></i>
                 @endslot
                 @slot('name')
                     Game List
@@ -76,7 +76,7 @@
 
             @component('component.nav-item-count')
                 @slot('icon')
-                    <i class="feather-list"></i>
+                    <i class="feather-server"></i>
                 @endslot
                 @slot('name')
                     Software List
@@ -86,6 +86,72 @@
                 @endslot
                 @slot('count')
                     {{ \App\Software::count() }}
+                @endslot
+            @endcomponent
+            @component('component.nav-spacer')
+            @endcomponent
+            @component('component.nav-title')
+            Adult Management
+        @endcomponent
+
+        @component('component.nav-item')
+            @slot('icon')
+                <i class="fas fa-gamepad"></i>
+            @endslot
+            @slot('name')
+                Add Adult
+            @endslot
+            @slot('link')
+                {{ route('adult.create') }}
+            @endslot
+        @endcomponent
+
+        @component('component.nav-item-count')
+            @slot('icon')
+                <i class="feather-server"></i>
+            @endslot
+            @slot('name')
+                Adult List
+            @endslot
+            @slot('link')
+                {{ route('adult.index') }}
+            @endslot
+            @slot('count')
+                {{ \App\Adult::count() }}
+            @endslot
+        @endcomponent
+        @component('component.nav-spacer')
+        @endcomponent
+            @component('component.nav-title')
+            User Management
+        @endcomponent
+
+            @component('component.nav-item-count')
+                @slot('icon')
+                    <i class="feather-users"></i>
+                @endslot
+                @slot('name')
+                    Users List
+                @endslot
+                @slot('link')
+                    {{ route('user.userList') }}
+                @endslot
+                @slot('count')
+                    {{ \App\User::count() }}
+                @endslot
+            @endcomponent
+            @component('component.nav-item-count')
+                @slot('icon')
+                    <i class="feather-message-square"></i>
+                @endslot
+                @slot('name')
+                    Message List
+                @endslot
+                @slot('link')
+                    {{ route('user.messageList') }}
+                @endslot
+                @slot('count')
+                    {{ \App\Message::count() }}
                 @endslot
             @endcomponent
             @component('component.nav-spacer')
@@ -110,59 +176,59 @@
         @slot('icon')
             <i class="fas fa-network-wired"></i>
         @endslot
-                        @slot('name')
+                                @slot('name')
             Add Popular
         @endslot
-                        @slot('link')
+                                @slot('link')
             {{ route('popular.create') }}
         @endslot
     @endcomponent
 
-                @component('component.nav-item-count')
+                    @component('component.nav-item-count')
         @slot('icon')
             <i class="feather-list"></i>
         @endslot
-                        @slot('name')
+                                @slot('name')
             Popular List
         @endslot
-                        @slot('link')
+                                @slot('link')
             {{ route('popular.index') }}
         @endslot
-                        @slot('count')
+                                @slot('count')
             {{ \App\Popular::count() }}
         @endslot
     @endcomponent
 
-                @component('component.nav-spacer')
+                    @component('component.nav-spacer')
     @endcomponent
 
-                @component('component.nav-title')
+                    @component('component.nav-title')
         Ads Management
     @endcomponent
 
-                @component('component.nav-item')
+                    @component('component.nav-item')
         @slot('icon')
             <i class="feather-gift"></i>
         @endslot
-                        @slot('name')
+                                @slot('name')
             Add Ads
         @endslot
-                        @slot('link')
+                                @slot('link')
             {{ route('ads.create') }}
         @endslot
     @endcomponent
 
-                @component('component.nav-item-count')
+                    @component('component.nav-item-count')
         @slot('icon')
             <i class="feather-list"></i>
         @endslot
-                        @slot('name')
+                                @slot('name')
             Ads List
         @endslot
-                        @slot('link')
+                                @slot('link')
             {{ route('ads.index') }}
         @endslot
-                        @slot('count')
+                                @slot('count')
             {{ \App\Ads::count() }}
         @endslot
     @endcomponent -->
@@ -171,12 +237,26 @@
             @endcomponent
 
             @component('component.nav-title')
-                Request Management
+                Other Management
+            @endcomponent
+            @component('component.nav-item-count')
+                @slot('icon')
+                    <i class="feather-search"></i>
+                @endslot
+                @slot('name')
+                    Search List
+                @endslot
+                @slot('link')
+                    {{ route('viewer.index') }}
+                @endslot
+                @slot('count')
+                    {{ \App\SearchKeyword::count() }}
+                @endslot
             @endcomponent
 
             @component('component.nav-item-count')
                 @slot('icon')
-                    <i class="feather-list"></i>
+                    <i class="feather-send"></i>
                 @endslot
                 @slot('name')
                     Request List
@@ -190,7 +270,7 @@
             @endcomponent
             @component('component.nav-item-count')
                 @slot('icon')
-                    <i class="feather-list"></i>
+                    <i class="feather-edit-2"></i>
                 @endslot
                 @slot('name')
                     Comment List
@@ -199,31 +279,28 @@
                     {{ route('comment.index') }}
                 @endslot
                 @slot('count')
-                    {{ \App\Comment::count() }}
+                    {{ \App\Comment::withTrashed()->count() }}
                 @endslot
             @endcomponent
-            {{--            @component('component.nav-spacer') @endcomponent --}}
-
-            {{--            @component('component.nav-title') Suggest Management @endcomponent --}}
-
-            {{--            @component('component.nav-item-count') --}}
-            {{--                @slot('icon') <i class="feather-list"></i> @endslot --}}
-            {{--                @slot('name') Suggest List @endslot --}}
-            {{--                @slot('link') {{ route('suggest.index') }} @endslot --}}
-            {{--                @slot('count') {{ \App\Suggest::count() }} @endslot --}}
-            {{--            @endcomponent --}}
-
-            @component('component.nav-item')
+            @component('component.nav-item-count')
                 @slot('icon')
-                    <i class="feather-list"></i>
+                    <i class="feather-link"></i>
                 @endslot
                 @slot('name')
-                    Popular List
+                    Broken Links
                 @endslot
                 @slot('link')
-                    {{ route('viewer.index') }}
+                    {{ route('suggest.index') }}
+                @endslot
+                @slot('count')
+                    {{ \App\Suggest::count() }}
                 @endslot
             @endcomponent
+            {{-- @component('component.nav-spacer') @endcomponent --}}
+
+            {{-- @component('component.nav-title') Suggest Management @endcomponent --}}
+
+
 
             @component('component.nav-spacer')
             @endcomponent

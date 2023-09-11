@@ -37,6 +37,15 @@
                                         @enderror
                                     </div>
                                     <div class="form-group">
+                                        <label for="keywords">Search Keywords</label>
+                                        <input required type="text" class="form-control @error('keywords') is-invalid @enderror" name="keywords" id="keywords" value="{{ $post->keywords }}" placeholder="search keywords">
+                                        @error('keywords')
+                                        <small class="invalid-feedback font-weight-bold" role="alert">
+                                            {{ $message }}
+                                        </small>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
                                         <label for="tag_id">Category</label>
                                         <select name="tag_id[]" id="tag_id" class="form-control select2" multiple="multiple">
                                             

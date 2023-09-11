@@ -48,9 +48,9 @@
                             <tr>
                                 <th scope="col">#</th>
                                 <th  scope="col">ဂိမ်းနာမည်</th>
-                                <th scope="col">ဂိမ်းတင်သူ</th>
-                                <th scope="col">Version</th>
+                                <th scope="col">Keywords</th>
                                 <th scope="col">Link</th>
+                                <th scope="col">ဂိမ်းတင်သူ</th>
                                 <th scope="col">Controls</th>
                             </tr>
                             </thead>
@@ -67,10 +67,8 @@
                                         </div>
 
                                     </td>
-                                    <td>
-                                        <p class="badge badge-pill badge-success p-2">{{ $p->getUser->name}}</p>
-                                    </td>
-                                    <td>{{ $p->version }}</td>
+                                   
+                                    <td>{{ $p->keywords }}</td>
                                     <td class="justify-content-around">
                                         @isset($p->link1)
                                             @if(str_contains($p->link1, 'drive.google'))
@@ -107,9 +105,12 @@
                                         @endisset
                                     </td>
                                     <td>
+                                        <p class="badge badge-pill badge-success p-2">{{ $p->getUser->name}}</p>
+                                    </td>
+                                    <td>
                                         <div class="d-inline-flex">
-                                            @if($p->user_id==auth()->user()->id || auth()->user()->id==3)
-                                            <a target="" href="{{ route('post.edit',$p->id) }}" class="btn mr-2 btn-outline-warning btn-sm">
+                                            @if($p->user_id==auth()->user()->id || auth()->user()->role==1)
+                                            <a target="_blank" href="{{ route('post.edit',$p->id) }}" class="btn mr-2 btn-outline-warning btn-sm">
                                                 <i class="feather-edit"></i>
                                             </a>
                                             <form action="{{ route('post.destroy',$p->id) }}"  method="post">
