@@ -13,6 +13,8 @@
                     </button>
                 </div>
             </li>
+        @if(auth()->user()->role == 1)
+
             <li>
                 <a class="menu-item mt-3" href="{{ route('home') }}">
                     <span>
@@ -21,7 +23,108 @@
                     </span>
                 </a>
             </li>
+        @endif
+        @if(auth()->user()->role == 4)
+        @component('component.nav-spacer')
+            @endcomponent
 
+            @component('component.nav-title')
+                Seller Management
+            @endcomponent
+
+            @component('component.nav-item')
+                @slot('icon')
+                    <i class="fas fa-gamepad"></i>
+                @endslot
+                @slot('name')
+                    Add Seller
+                @endslot
+                @slot('link')
+                    {{ route('seller.create') }}
+                @endslot
+            @endcomponent
+
+            @component('component.nav-item-count')
+                @slot('icon')
+                    <i class="feather-server"></i>
+                @endslot
+                @slot('name')
+                    Seller List
+                @endslot
+                @slot('link')
+                    {{ route('seller.index') }}
+                @endslot
+                @slot('count')
+                    {{ \App\Seller::count() }}
+                @endslot
+            @endcomponent
+            @component('component.nav-spacer')
+            @endcomponent
+
+            @component('component.nav-title')
+                Account Management
+            @endcomponent
+
+            @component('component.nav-item')
+                @slot('icon')
+                    <i class="fas fa-gamepad"></i>
+                @endslot
+                @slot('name')
+                    Add Account
+                @endslot
+                @slot('link')
+                    {{ route('account.create') }}
+                @endslot
+            @endcomponent
+
+            @component('component.nav-item-count')
+                @slot('icon')
+                    <i class="feather-server"></i>
+                @endslot
+                @slot('name')
+                    Account List
+                @endslot
+                @slot('link')
+                    {{ route('account.index') }}
+                @endslot
+                @slot('count')
+                    {{ \App\Account::count() }}
+                @endslot
+            @endcomponent
+            @component('component.nav-spacer')
+            @endcomponent
+
+            @component('component.nav-title')
+                Skin Management
+            @endcomponent
+
+            @component('component.nav-item')
+                @slot('icon')
+                    <i class="fas fa-gamepad"></i>
+                @endslot
+                @slot('name')
+                    Add Skin
+                @endslot
+                @slot('link')
+                    {{ route('skin.create') }}
+                @endslot
+            @endcomponent
+
+            @component('component.nav-item-count')
+                @slot('icon')
+                    <i class="feather-server"></i>
+                @endslot
+                @slot('name')
+                    Skin List
+                @endslot
+                @slot('link')
+                    {{ route('skin.index') }}
+                @endslot
+                @slot('count')
+                    {{ \App\Skin::count() }}
+                @endslot
+            @endcomponent
+        @else
             @component('component.nav-spacer')
             @endcomponent
 
@@ -300,7 +403,7 @@
 
             {{-- @component('component.nav-title') Suggest Management @endcomponent --}}
 
-
+        @endif
 
             @component('component.nav-spacer')
             @endcomponent

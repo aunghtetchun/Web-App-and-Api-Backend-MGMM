@@ -15,6 +15,8 @@ use App\SaveGame;
 use App\Comment;
 use App\Message;
 use App\Adult;
+use App\Account;
+use App\Skin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\ResponseController as ResponseController;
@@ -117,7 +119,7 @@ class ApiController extends ResponseController
     public function getPopularGames()
     {
         try {
-            $games = Post::with('getCategory')->limit(20)->get();
+            $games = Post::with('getCategory')->orderBy('created_at')->limit(20)->get();
             foreach ($games as $g) {
                 $logo = $g->logo;
                 $g->logo = asset("storage/logo/" . $logo);
@@ -186,7 +188,7 @@ class ApiController extends ResponseController
     {
         try {
             $title = 'All';
-            $games = Post::orderBy('description', 'asc')->paginate(20);
+            $games = Post::where('category_id', '!=', '20')->orderBy('updated_at', 'desc')->paginate(15);
             foreach ($games as $g) {
                 $logo = $g->logo;
                 $g->logo = asset("storage/logo/" . $logo);
@@ -210,7 +212,7 @@ class ApiController extends ResponseController
     {
         try {
             $title = Category::where('id', $category_id)->first('title')->title;
-            $games = Category::find($category_id)->posts()->paginate(20);
+            $games = Category::find($category_id)->posts()->orderBy('updated_at', 'desc')->paginate(15);
             foreach ($games as $g) {
                 $logo = $g->logo;
                 $g->logo = asset("storage/logo/" . $logo);
@@ -367,7 +369,7 @@ class ApiController extends ResponseController
     public function getAllSoftwares()
     {
         try {
-            $softwares = Software::latest()->paginate(20);
+            $softwares = Software::orderBy('updated_at', 'desc')->paginate(20);
             foreach ($softwares as $g) {
                 $logo = $g->logo;
                 $g->logo = asset("storage/slogo/" . $logo);
@@ -414,7 +416,7 @@ class ApiController extends ResponseController
     public function searchSoftwares($search_value)
     {
         try {
-            $softwares = Software::where('name', 'LIKE', "%{$search_value}%")->latest()->paginate(20);
+            $softwares = Software::where('name', 'LIKE', "%{$search_value}%")->orderBy('name')->paginate(20);
             foreach ($softwares as $g) {
                 $logo = $g->logo;
                 $g->logo = asset("storage/slogo/" . $logo);
@@ -436,7 +438,7 @@ class ApiController extends ResponseController
     public function getAllAdults()
     {
         try {
-            $adults = Adult::orderBy('count', 'desc')->paginate(15);
+            $adults = Adult::orderBy('updated_at', 'desc')->paginate(15);
             foreach ($adults as $g) {
                 $logo = $g->logo;
                 $g->logo = "http://mgmm.pao666.net/storage/logo/". $logo;
@@ -497,6 +499,76 @@ class ApiController extends ResponseController
             return response()->json([
                 'result' => 0,
                 'message' => 'Fail to get all adults!',
+                'message_detail' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    public function getAllAccounts()
+    {
+        try {
+            $accounts = Account::orderBy('updated_at', 'desc')->paginate(15);
+            foreach ($accounts as $g) {
+                $profile = $g->profile;
+                $g->profile = asset("storage/profile/" . $profile);
+            }
+            return response()->json([
+                'result' => 1,
+                'message' => 'success',
+                'accounts' => $accounts,
+            ], 201);
+        } catch (\Exception $e) {
+            return response()->json([
+                'result' => 0,
+                'message' => 'Fail to get all accounts!',
+                'message_detail' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    public function getAccountDetails($id)
+    {
+        try {
+            $account = Account::where('id', $id)->first();
+            $profile = $account->profile;
+            $account->profile = asset("storage/profile/" . $profile);
+            $account->skins = array_map(function ($photo) {
+                return "https://modgamesmm.com/storage/skin/".$photo["url"];
+            }, $account->skins()->get()->toArray());
+            $account->photos = array_map(function ($photo) {
+                return asset("storage/skins/" . $photo["name"]);
+            }, $account->getPhoto()->get()->toArray());
+            return response()->json([
+                'result' => 1,
+                'message' => 'success',
+                'account' => $account
+            ], 201);
+        } catch (\Exception $e) {
+            return response()->json([
+                'result' => 0,
+                'message' => 'Fail to get account detail!',
+                'message_detail' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    public function searchAccounts($search_value)
+    {
+        try {
+            $accounts = Account::where('name', 'LIKE', "%{$search_value}%")->latest()->paginate(20);
+            foreach ($accounts as $g) {
+                $profile = $g->profile;
+                $g->profile =asset("storage/profile/" . $profile);
+            }
+            return response()->json([
+                'result' => 1,
+                'message' => 'success',
+                'accounts' => $accounts,
+            ], 201);
+        } catch (\Exception $e) {
+            return response()->json([
+                'result' => 0,
+                'message' => 'Fail to get all accounts!',
                 'message_detail' => $e->getMessage(),
             ], 500);
         }

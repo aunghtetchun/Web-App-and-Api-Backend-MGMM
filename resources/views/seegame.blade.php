@@ -41,6 +41,65 @@ MGMM {{ $game->name }}
 @section('content')
 <div class="container  px-0 my-2" style="background:rgba(11,15,18,0.6);">
 
+            <!-- Button trigger modal -->
+        <button type="button" id="showmodal" class="btn d-none btn-primary" data-toggle="modal" data-target="#exampleModal">
+        Launch demo modal
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">MGMM စျေးဆိုင်ပါဝင်တဲ့ MGMM Apk Update ထွက်လာပါပြီရှင်...</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card">
+                    <div class="card-body d-flex flex-wrap justify-content-around align-items-center">
+                        <h5 class="col-12 px-0 my-3">MGMM Apk နောက်ဆုံးဗားရှင်းဒေါင်းရန်</h5>
+                        <hr>
+                        <!-- <div class="col-12 col-md-4 px-1"> -->
+                        <!-- <a href="https://mega.nz/file/WNxVkZKI#rr5EzefzcUwurQvc14m6ow2wUQss18W9bo5iv7UnFOQ"
+                                class="btn col-12 px-0 mb-2 btn-outline-primary">Download apk (mega)</a> -->
+                                <!-- <a href="https://mega.nz/file/WNxVkZKI#rr5EzefzcUwurQvc14m6ow2wUQss18W9bo5iv7UnFOQ"
+                                class="btn col-12 px-0 mb-2 btn-outline-primary">Download apk (mega)</a>
+                        </div> -->
+                        <div class="col-6 px-1">
+                            <a href="https://www.mediafire.com/file/so1l5prv67z650p/MGMM_Update.apk/file?fbclid=IwAR1n7k4_klLiV79XN1lBmksr1csrHiHcNsuj70klqc6zjC_kQrBd0jSxOJc"
+                                class="btn col-12 px-0 py-2 btn-outline-primary mb-2">Download apk (Mediafire)</a>
+                        </div>
+                        <div class="col-6 px-1">
+                            <a href="https://drive.google.com/u/0/uc?id=19fh7MLXwkhnU0eYJDb3u7cQQQxgUK8bf&export=download&fbclid=IwAR3DxwndpZCz9YOEzjszo5UvpKF2c6jzCakp-E6k42SD6XSMgRgl_rw0exo"
+                                class="btn col-12 py-2 px-0 mb-2 btn-outline-primary">Download apk (Google Drive)</a>
+                        </div>
+                        <h5 class=" col-12 px-0 my-3">MGMM ၁၈+ သီးသန့်တင်တဲ့ Apk ဒေါင်းရန်</h5>
+                        <hr>
+                        <!-- <div class="col-12 col-md-4 px-1"> -->
+                        <!-- <a href="https://mega.nz/file/WNxVkZKI#rr5EzefzcUwurQvc14m6ow2wUQss18W9bo5iv7UnFOQ"
+                                class="btn col-12 px-0 mb-2 btn-outline-primary">Download apk (mega)</a> -->
+                                <!-- <a href="https://mega.nz/file/WNxVkZKI#rr5EzefzcUwurQvc14m6ow2wUQss18W9bo5iv7UnFOQ"
+                                class="btn col-12 px-0 mb-2 btn-outline-primary">Download apk (mega)</a>
+                        </div> -->
+                        <div class="col-12 px-1">
+                            <a href="https://drive.google.com/file/d/1lnbYDsayeOHF-enrlqSKSHhcHA_PRDOs/view?fbclid=IwAR0T17w0zTjTzp9sY8NZ4des56BWhVcPQFRvlBKz7l2chk83-RsXd6rco74"
+                                class="btn col-12 py-2 px-0 mb-2 btn-outline-success">Download 18+ apk (Google Drive)</a>
+                        </div>
+                        <div class="col-12 px-1">
+                            <a href="https://www.facebook.com/100064025654123/posts/pfbid0jpLKWf3X1N17zFQQxvUc8vsfpmenvGknpTtGUR52fq6VB4FmSsBLeubrHygYbxJsl/?mibextid=Nif5oz"
+                                class="btn col-12 py-2 px-0 mb-2 btn-warning">Google Drive လင့်ဒေါင်းနည်း</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary px-3" data-dismiss="modal">Close</button>
+            </div>
+            </div>
+        </div>
+        </div>
     <div class="col-12 pt-2 d-flex bg-light flex-wrap align-items-center" style="background: rgba(11,15,18,0.6); ">
 
         <form class="text-white w-100 mx-1 mt-2 mb-0" action="{{ route('game.gameSearch') }}" method="get"
@@ -369,6 +428,7 @@ MGMM {{ $game->name }}
 @section('foot')
 <script>
     $(document).ready(function() {
+        $("#showmodal").click();
         $('.all_photo').slick({
             dots: true,
             infinite: true,

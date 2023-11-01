@@ -31,3 +31,7 @@ use Illuminate\Http\Request;
     Route::get('/adults/details/{slug}', 'ApiController@getAdultDetails');
     Route::get('/adults/search/{search_value}', 'ApiController@searchAdults');
    
+    Route::get('/accounts', 'ApiController@getAllAccounts');
+    Route::get('/accounts/details/{id}', 'ApiController@getAccountDetails');
+    Route::get('/accounts/search/{search_value}', 'ApiController@searchAccounts');
+   

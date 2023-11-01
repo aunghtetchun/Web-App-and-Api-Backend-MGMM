@@ -105,7 +105,7 @@
                                         @endisset
                                     </td>
                                     <td>
-                                        <p class="badge badge-pill badge-success p-2">{{ $p->getUser->name}}</p>
+                                        <p class="badge badge-pill badge-success p-2">{{ $p->getUser? $p->getUser->name: 'Unknown'}}</p>
                                     </td>
                                     <td>
                                         <div class="d-inline-flex">

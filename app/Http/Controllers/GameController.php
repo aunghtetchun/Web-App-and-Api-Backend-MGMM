@@ -18,7 +18,7 @@ class GameController extends Controller
 {
     public function popular(){
 //        return 'hello';
-        $posts=Post::orderBy('count','desc')->limit(12)->get();
+        $posts=Post::orderBy('updated_at','desc')->limit(12)->get();
         // $posts=Post::select('*')
         // ->leftJoin('viewers', 'posts.id', '=', 'viewers.post_id')
         // ->orderBy('viewers.count', 'DESC')
@@ -28,17 +28,17 @@ class GameController extends Controller
     }
     public function gameList(Request $request){
         $title='ဂိမ်းအားလုံး';
-        $games=Post::orderBy('description','asc')->paginate(9);
+        $games=Post::orderBy('updated_at','desc')->paginate(9);
         return view('games',compact('games','title'));
     }
     public function gameListFilter($id){
         if($id==10){
-            return redirect('http://mgmm.pao666.net/game/'.$id);
+            return redirect('https://app.modgamesmm.com/adults');
         }else{
         $c_name=Category::where('id',$id)->first()->title;
         $title=$c_name.' ဂိမ်းများ';
         // $games=Post::where('category_id',$id)->latest()->paginate(12);
-        $games=Category::find($id)->posts()->paginate(12);
+        $games=Category::find($id)->posts()->orderBy('updated_at', 'desc')->paginate(12);
         return view('games',compact('games','title'));
         }
     }

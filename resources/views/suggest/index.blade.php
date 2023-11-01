@@ -42,9 +42,9 @@
                             {{ $s->getPost->name}}
                             @elseif(isset($s->software_id) && isset($s->getSoftware))
                             {{ $s->getSoftware->name}}
-			@elseif(isset($s->getSoftware))
-				{{$s->getAdult->name}}
-                            @endif
+                            @elseif(isset($s->adult_id) && isset($s->getAdult))
+                                {{$s->getAdult->name}}
+                                            @endif
                         </td>
 
 			<td>{{$s->error_type}}</td>
@@ -82,6 +82,17 @@
                                                     </a>
                                                 @endif
                                         @endisset
+                                        @isset($s->getAdult->link1)
+                                            @if(str_contains($s->getAdult->link1, 'drive.google'))
+                                                <a target="_blank" href="{{ $s->getAdult->link1 }}" class="btn btn-primary btn-sm mt-1"><i class="feather-arrow-down"></i>
+                                                    <span class="badge badge-light">1</span>
+                                                </a>
+                                                @else
+                                                <a target="_blank" href="{{ $s->getAdult->link1 }}" class="btn btn-dark btn-sm mt-1"><i class="feather-arrow-down"></i>
+                                                    <span class="badge badge-light">1</span>
+                                                </a>
+                                            @endif
+                                        @endisset
                                     </td>
                         <td>
                             <div class="d-inline-flex">
@@ -101,7 +112,7 @@
                                     <i class="feather-edit"></i>
                                 </a>
 				@else
-					 <a target="" href="{{ route('suggest.edit',$s->adult_id) }}" class="btn ml-2 btn-outline-warning btn-sm">
+					 <a target="" href="{{ route('adult.edit',$s->adult_id) }}" class="btn ml-2 btn-outline-warning btn-sm">
                                     <i class="feather-edit"></i>
                                 </a>
                                 @endif

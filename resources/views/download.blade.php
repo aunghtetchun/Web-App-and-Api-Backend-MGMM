@@ -270,16 +270,18 @@
                         <h5 class="card-title col-12 px-0">MGMM Apk ဒေါင်းရန်</h5>
                         <hr>
                         <p class="card-text col-12 px-0">MGMM website အား ဖုန်း Apk အဖြစ်အသုံးပြုနိုင်ပါပြီရှင်...</p>
-                        <div class="col-12 col-md-4 px-1">
-                            <a href="https://mega.nz/file/WNxVkZKI#rr5EzefzcUwurQvc14m6ow2wUQss18W9bo5iv7UnFOQ"
+                        <!-- <div class="col-12 col-md-4 px-1"> -->
+                        <!-- <a href="https://mega.nz/file/WNxVkZKI#rr5EzefzcUwurQvc14m6ow2wUQss18W9bo5iv7UnFOQ"
+                                class="btn col-12 px-0 mb-2 btn-outline-primary">Download apk (mega)</a> -->
+                                <!-- <a href="https://mega.nz/file/WNxVkZKI#rr5EzefzcUwurQvc14m6ow2wUQss18W9bo5iv7UnFOQ"
                                 class="btn col-12 px-0 mb-2 btn-outline-primary">Download apk (mega)</a>
-                        </div>
+                        </div> -->
                         <div class="col-12 col-md-4 px-1">
-                            <a href="https://www.mediafire.com/file/fe8inzb2ejs7ywc/modgamesmm.apk/file"
+                            <a href="https://www.mediafire.com/file/so1l5prv67z650p/MGMM_Update.apk/file?fbclid=IwAR1n7k4_klLiV79XN1lBmksr1csrHiHcNsuj70klqc6zjC_kQrBd0jSxOJc"
                                 class="btn col-12 px-0 btn-outline-primary mb-2">Download apk (mediafire)</a>
                         </div>
                         <div class="col-12 col-md-4 px-1">
-                            <a href="https://drive.google.com/file/d/1uTBrrvqUMeBVj0uvSRGeVnwOWvKOmFxH/view?usp=drive_link"
+                            <a href="https://drive.google.com/u/0/uc?id=19fh7MLXwkhnU0eYJDb3u7cQQQxgUK8bf&export=download&fbclid=IwAR3DxwndpZCz9YOEzjszo5UvpKF2c6jzCakp-E6k42SD6XSMgRgl_rw0exo"
                                 class="btn col-12 px-0 mb-2 btn-outline-primary">Download apk (gdrive)</a>
                         </div>
                     </div>

@@ -16,7 +16,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
-
+use Illuminate\Support\Facades\Cache;
 
 class PostController extends Controller
 {
@@ -31,7 +31,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts=Post::latest()->get();
+        // $posts=Post::latest()->get();
         // foreach ($posts as $g){
         //     array_map(function($photo){
         //         if (!file_exists(public_path()."/storage/post/".$photo["name"])){
@@ -39,6 +39,19 @@ class PostController extends Controller
         //         }
         //     },$g->getPhoto()->get()->toArray());
         // }
+        $cacheKey = 'cached_data';
+
+        // Check if the data is in the cache
+        if (Cache::has($cacheKey)) {
+            $posts = Cache::get($cacheKey);
+        } else {
+            // If not in cache, fetch data from the database and store in the cache
+            $posts = Post::latest()->get(); // Replace 'YourModel' with your actual model name
+
+            // Cache the data for 60 minutes (you can adjust the time as per your requirement)
+            Cache::put($cacheKey, $posts, 60);
+        }
+
         return view('post.index',compact('posts'));
     }
 
@@ -121,7 +134,7 @@ class PostController extends Controller
 //            $newName = uniqid()."_logo.".$request->file("logo")->getClientOriginalExtension();
             $newName = uniqid()."_logo.png";
             $image_resize = Image::make($request->file("logo"));
-            $image_resize->encode('png', 100)->resize(100, null, function ($constraint) {
+            $image_resize->resize(100, null, function ($constraint) {
                 $constraint->aspectRatio();
             });
             $image_resize->save(public_path('storage/logo/' .$newName));
@@ -157,7 +170,7 @@ class PostController extends Controller
                 $newName = uniqid()."_post.png";
 //                $image->storeAs($dir,$newName);
                 $image_resize = Image::make($image);
-                $image_resize->encode('png', 100)->resize(530, null, function ($constraint) {
+                $image_resize->resize(530, null, function ($constraint) {
                     $constraint->aspectRatio();
                 });
 //                return $image_resize->response();

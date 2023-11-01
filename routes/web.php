@@ -11,6 +11,7 @@
 |
 */
 
+
 Route::get('/', 'GameController@popular');
 Auth::routes([
   'register' => false, // Registration Routes...
@@ -90,3 +91,11 @@ Route::get('/softwares/{slug}', 'GameController@singleSoftwareList')->name('soft
 Route::get('/software_search', 'GameController@softwareSearch')->name('software.softwareSearch');
 Route::get('/download_software/{slug}', 'GameController@softwareDownload')->name('software.download');
 Route::get('/sitemap', 'GameController@generateSitemap');
+
+
+
+Route::group(['middleware' => ['auth', 'isSeller']], function () {
+  Route::resource('/skin', 'SkinController');
+  Route::resource('/account', 'AccountController');
+  Route::resource('/seller', 'SellerController');
+});

@@ -13,6 +13,8 @@
                     </button>
                 </div>
             </li>
+        <?php if(auth()->user()->role == 1): ?>
+
             <li>
                 <a class="menu-item mt-3" href="<?php echo e(route('home')); ?>">
                     <span>
@@ -21,7 +23,117 @@
                     </span>
                 </a>
             </li>
+        <?php endif; ?>
+        <?php if(auth()->user()->role == 4): ?>
+        <?php $__env->startComponent('component.nav-spacer'); ?>
+            <?php echo $__env->renderComponent(); ?>
 
+            <?php $__env->startComponent('component.nav-title'); ?>
+                Seller Management
+            <?php echo $__env->renderComponent(); ?>
+
+            <?php $__env->startComponent('component.nav-item'); ?>
+                <?php $__env->slot('icon'); ?>
+                    <i class="fas fa-gamepad"></i>
+                <?php $__env->endSlot(); ?>
+                <?php $__env->slot('name'); ?>
+                    Add Seller
+                <?php $__env->endSlot(); ?>
+                <?php $__env->slot('link'); ?>
+                    <?php echo e(route('seller.create')); ?>
+
+                <?php $__env->endSlot(); ?>
+            <?php echo $__env->renderComponent(); ?>
+
+            <?php $__env->startComponent('component.nav-item-count'); ?>
+                <?php $__env->slot('icon'); ?>
+                    <i class="feather-server"></i>
+                <?php $__env->endSlot(); ?>
+                <?php $__env->slot('name'); ?>
+                    Seller List
+                <?php $__env->endSlot(); ?>
+                <?php $__env->slot('link'); ?>
+                    <?php echo e(route('seller.index')); ?>
+
+                <?php $__env->endSlot(); ?>
+                <?php $__env->slot('count'); ?>
+                    <?php echo e(\App\Seller::count()); ?>
+
+                <?php $__env->endSlot(); ?>
+            <?php echo $__env->renderComponent(); ?>
+            <?php $__env->startComponent('component.nav-spacer'); ?>
+            <?php echo $__env->renderComponent(); ?>
+
+            <?php $__env->startComponent('component.nav-title'); ?>
+                Account Management
+            <?php echo $__env->renderComponent(); ?>
+
+            <?php $__env->startComponent('component.nav-item'); ?>
+                <?php $__env->slot('icon'); ?>
+                    <i class="fas fa-gamepad"></i>
+                <?php $__env->endSlot(); ?>
+                <?php $__env->slot('name'); ?>
+                    Add Account
+                <?php $__env->endSlot(); ?>
+                <?php $__env->slot('link'); ?>
+                    <?php echo e(route('account.create')); ?>
+
+                <?php $__env->endSlot(); ?>
+            <?php echo $__env->renderComponent(); ?>
+
+            <?php $__env->startComponent('component.nav-item-count'); ?>
+                <?php $__env->slot('icon'); ?>
+                    <i class="feather-server"></i>
+                <?php $__env->endSlot(); ?>
+                <?php $__env->slot('name'); ?>
+                    Account List
+                <?php $__env->endSlot(); ?>
+                <?php $__env->slot('link'); ?>
+                    <?php echo e(route('account.index')); ?>
+
+                <?php $__env->endSlot(); ?>
+                <?php $__env->slot('count'); ?>
+                    <?php echo e(\App\Account::count()); ?>
+
+                <?php $__env->endSlot(); ?>
+            <?php echo $__env->renderComponent(); ?>
+            <?php $__env->startComponent('component.nav-spacer'); ?>
+            <?php echo $__env->renderComponent(); ?>
+
+            <?php $__env->startComponent('component.nav-title'); ?>
+                Skin Management
+            <?php echo $__env->renderComponent(); ?>
+
+            <?php $__env->startComponent('component.nav-item'); ?>
+                <?php $__env->slot('icon'); ?>
+                    <i class="fas fa-gamepad"></i>
+                <?php $__env->endSlot(); ?>
+                <?php $__env->slot('name'); ?>
+                    Add Skin
+                <?php $__env->endSlot(); ?>
+                <?php $__env->slot('link'); ?>
+                    <?php echo e(route('skin.create')); ?>
+
+                <?php $__env->endSlot(); ?>
+            <?php echo $__env->renderComponent(); ?>
+
+            <?php $__env->startComponent('component.nav-item-count'); ?>
+                <?php $__env->slot('icon'); ?>
+                    <i class="feather-server"></i>
+                <?php $__env->endSlot(); ?>
+                <?php $__env->slot('name'); ?>
+                    Skin List
+                <?php $__env->endSlot(); ?>
+                <?php $__env->slot('link'); ?>
+                    <?php echo e(route('skin.index')); ?>
+
+                <?php $__env->endSlot(); ?>
+                <?php $__env->slot('count'); ?>
+                    <?php echo e(\App\Skin::count()); ?>
+
+                <?php $__env->endSlot(); ?>
+            <?php echo $__env->renderComponent(); ?>
+        <?php else: ?>
             <?php $__env->startComponent('component.nav-spacer'); ?>
             <?php echo $__env->renderComponent(); ?>
 
@@ -328,7 +440,7 @@
 
             
 
-
+        <?php endif; ?>
 
             <?php $__env->startComponent('component.nav-spacer'); ?>
             <?php echo $__env->renderComponent(); ?>

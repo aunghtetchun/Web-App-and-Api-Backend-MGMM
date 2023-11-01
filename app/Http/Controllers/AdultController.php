@@ -91,31 +91,26 @@ class AdultController extends Controller
             $adult->link3=null;
         }
         if ($request->hasFile('logo')){
-            $dir="public/slogo";
-//            $newName = uniqid()."_slogo.".$request->file("slogo")->getClientOriginalExtension();
-            $newName = uniqid()."_slogo.png";
+            $dir="public/alogo";
+            $newName = uniqid() . "_alogo." . $image->getClientOriginalExtension();
             $image_resize = Image::make($request->file("logo"));
-            $image_resize->encode('png', 100)->resize(100, null, function ($constraint) {
+            $image_resize->resize(100, null, function ($constraint) {
                 $constraint->aspectRatio();
             });
-            $image_resize->save(public_path('storage/slogo/' .$newName));
+            $image_resize->save(public_path('storage/alogo/' .$newName));
             $adult->logo = $newName;
         }
-        $adult->save();
-
-        
+        $adult->save();        
 
         if ($request->hasFile('images')){
             $dir="public/adult";
             foreach($request->file('images') as $image)
             {
-                $newName = uniqid()."_adult.png";
-//                $image->storeAs($dir,$newName);
+                $newName = uniqid() . "_adult." . $image->getClientOriginalExtension();
                 $image_resize = Image::make($image);
-                $image_resize->encode('png', 100)->resize(430, null, function ($constraint) {
+                $image_resize->resize(550, null, function ($constraint) {
                     $constraint->aspectRatio();
                 });
-//                return $image_resize->response();
                 $image_resize->save(public_path('storage/adult/' .$newName));
                 $photo=new Photo();
                 $photo->name=$newName;
@@ -123,7 +118,6 @@ class AdultController extends Controller
                 $photo->adult_id=$aa->id;
                 $photo->save();
             }
-//            return 'success';
 
         }
         return redirect()->route("adult.create")->with("toast","Adult Add Successful");
@@ -207,16 +201,16 @@ class AdultController extends Controller
         }else{
             $adult->link3=null;
         }
-        // if ($request->hasFile('logo')){
-        //     $dir="public/slogo";
-        //     $newName = uniqid()."_slogo.png";
-        //     $image_resize = Image::make($request->file("logo"));
-        //     $image_resize->encode('png', 100)->resize(100, null, function ($constraint) {
-        //         $constraint->aspectRatio();
-        //     });
-        //     $image_resize->save(public_path('storage/slogo/' .$newName));
-        //     $adult->logo = $newName;
-        // }
+        if ($request->hasFile('logo')){
+            $dir="public/alogo";
+            $newName = uniqid() . "_alogo." . $image->getClientOriginalExtension();
+            $image_resize = Image::make($request->file("logo"));
+            $image_resize->resize(100, null, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+            $image_resize->save(public_path('storage/alogo/' .$newName));
+            $adult->logo = $newName;
+        }
         $adult->update();
 
         return redirect()->route("adult.index")->with("toast","Adult Update Successful");

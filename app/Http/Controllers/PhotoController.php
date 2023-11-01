@@ -65,6 +65,7 @@ class PhotoController extends Controller
         $request->validate([
             "post_id" => "numeric",
             "software_id" => "numeric",
+            "account_id" => "numeric",
 //            "images.*" => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
         if ($request->hasFile('images') && $request->post_id){
@@ -73,9 +74,8 @@ class PhotoController extends Controller
             {
                 $newName = uniqid()."_post.png";
 //                $image->storeAs($dir,$newName);
-
                 $image_resize = Image::make($image);
-                $image_resize->encode('png', 100)->resize(530, null, function ($constraint) {
+                $image_resize->resize(530, null, function ($constraint) {
                     $constraint->aspectRatio();
                 });
 //                return $image_resize->response();
@@ -101,13 +101,28 @@ class PhotoController extends Controller
                 $photo->post_id=$request->post_id;
                 $photo->save();
             }
-        }else{
-            $dir="public/software";
+        }
+        elseif ($request->hasFile('images') && $request->account_id){
+            foreach($request->file('images') as $image)
+            {
+                $newName = uniqid()."_account.png";
+                $image_resize = Image::make($image);
+                $image_resize->resize(500, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                });
+                $image_resize->save(public_path('storage/skins/' .$newName));
+
+                $photo=new Photo();
+                $photo->name=$newName;
+                $photo->account_id=$request->account_id;
+                $photo->save();
+        }}
+        else{
             foreach($request->file('images') as $image)
             {
                 $newName = uniqid()."_software.png";
                 $image_resize = Image::make($image);
-                $image_resize->encode('png', 100)->resize(530, null, function ($constraint) {
+                $image_resize->resize(530, null, function ($constraint) {
                     $constraint->aspectRatio();
                 });
 //                return $image_resize->response();
@@ -167,7 +182,11 @@ class PhotoController extends Controller
         if(isset($photo->post_id)){
         unlink(storage_path('/app/public/post/'.$photo->name));
 
-        }else{
+        }
+        elseif(isset($photo->account_id)){
+            unlink(storage_path('/app/public/skins/'.$photo->name));
+        }
+        else{
             unlink(storage_path('/app/public/software/'.$photo->name));
         }
 //        unlink(storage_path('/app/public/thumbnail/'.$photo->name));

@@ -25,7 +25,7 @@
                         <p class="mt-2 mb-0 px-0">( <span class="text-danger"> X </span>လောင်းကစားကြော်ငြာများလက်မခံပါ <span
                                 class="text-danger"> X </span> )</p>
                     </div>
-                    <img src="https://i.ibb.co/VVYJgXD/Screenshot-from-2023-07-14-22-22-13-min.png"
+                    <img src="https://i.ibb.co/k8pMx2w/Screenshot-from-2023-10-02-14-40-57.png"
                         class="w-100 d-block d-md-none h-100" alt="">
                 </div>
                 <div class="py-0">
@@ -37,7 +37,7 @@
                         <p class="mt-2 mb-0 px-0">( <span class="text-danger"> X </span>လောင်းကစားကြော်ငြာများလက်မခံပါ <span
                                 class="text-danger"> X </span> )</p>
                     </div>
-                    <img src="https://i.ibb.co/7WfvQWc/Screenshot-from-2023-07-14-22-16-27-1-1-min.png"
+                    <img src="https://i.ibb.co/k8pMx2w/Screenshot-from-2023-10-02-14-40-57.png"
                         class="w-100 d-block d-md-none h-100" alt="">
                 </div>
             </div>
@@ -116,11 +116,8 @@ endif; ?>"
                             </p>
 
                         </div>
-                        <!-- <div class="col-12 p-0 pt-2">
-                                        <img class="w-100 rounded" src="<?php echo e(asset('/storage/post/' . $post->getPhoto[0]->name)); ?>" alt="" style="border-radius:0.8rem!important;">
-                                        
-                                    </div> -->
-
+                        
+  
 
                     </div>
                 </div>
@@ -193,7 +190,7 @@ endif; ?>"
 
                         </div>
                         <!-- <div class="col-12 p-0 pt-2">
-                            <img class="w-100 rounded" src="<?php echo e(asset('/storage/post/' . $post->getPhoto[0]->name)); ?>" alt="" style="border-radius:0.8rem!important;">
+                            <img class="w-100 rounded" src="<?php echo e(asset('/storage/post/')); ?>" alt="" style="border-radius:0.8rem!important;">
                             
                         </div> -->
 

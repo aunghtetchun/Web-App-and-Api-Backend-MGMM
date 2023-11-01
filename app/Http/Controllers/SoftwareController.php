@@ -27,7 +27,7 @@ class SoftwareController extends Controller
      */
     public function index()
     {
-        $softwares=Software::latest()->get();
+        $softwares=Software::latest()->orderBy('updated_at', 'desc')->get();
         // foreach ($softwares as $g){
         //     array_map(function($photo){
         //         if (!file_exists(public_path()."/storage/software/".$photo["name"])){
