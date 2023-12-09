@@ -46,7 +46,7 @@ class PostController extends Controller
             $posts = Cache::get($cacheKey);
         } else {
             // If not in cache, fetch data from the database and store in the cache
-            $posts = Post::latest()->get(); // Replace 'YourModel' with your actual model name
+            $posts = Post::whereNull('crawl_url')->latest()->get(); // Replace 'YourModel' with your actual model name
 
             // Cache the data for 60 minutes (you can adjust the time as per your requirement)
             Cache::put($cacheKey, $posts, 60);
@@ -323,13 +323,16 @@ class PostController extends Controller
         if (auth()->user()->role =1 || $post->user_id = auth()->user()->id  ){     
 
         $old=Photo::where('post_id',$post->id)->get();
-        unlink(storage_path('/app/public/logo/'.$post->logo));
-//        unlink(storage_path('/app/public/thumbnail/'.$post->logo));
-
-        foreach ($old as $o){
-            unlink(storage_path('/app/public/post/'.$o->name));
-//            unlink(storage_path('/app/public/thumbnail/'.$o->name));
+        if($post->crawl_url == null){
+            unlink(storage_path('/app/public/logo/'.$post->logo));
+            //        unlink(storage_path('/app/public/thumbnail/'.$post->logo));
+            
+                    foreach ($old as $o){
+                        unlink(storage_path('/app/public/post/'.$o->name));
+            //            unlink(storage_path('/app/public/thumbnail/'.$o->name));
+                    }
         }
+       
         Photo::where('post_id',$post->id)->delete();
         Rating::where('post_id',$post->id)->delete();
         Comment::where('post_id',$post->id)->delete();
@@ -376,10 +379,8 @@ class PostController extends Controller
 //        return view('post.index',compact('posts'));
 //    }
     public function modFilter(){
-        $data=Post::latest()->get();
-        $posts = $data->filter(function ($value, $key) {
-            return $value->link1!=null;
-        });
+        $name='Award';
+        $posts=Post::where('link1', 'LIKE', "%{$name}%")->get();
         return view('post.index',compact('posts'));
     }
     public function noModFilter(){
@@ -388,5 +389,36 @@ class PostController extends Controller
             return $value->link1==null;
         });
         return view('post.index',compact('posts'));
+    }
+
+    public function apkaward()
+    {
+        $name = ".com/apkMoD/";
+    
+        // Fetch posts that need modification
+        $posts = Post::where(function ($query) use ($name) {
+            $query->where('link1', 'LIKE', "%{$name}%")
+                ->orWhere('link2', 'LIKE', "%{$name}%")
+                ->orWhere('link3', 'LIKE', "%{$name}%");
+        })->get();
+    
+        foreach ($posts as $post) {
+            $modifiedUrl1 = Str::replaceFirst('apkMoD', 'ApkMod', $post->link1);
+            $modifiedUrl2 = Str::replaceFirst('apkMoD', 'ApkMod', $post->link2);
+            $modifiedUrl3 = Str::replaceFirst('apkMoD', 'ApkMod', $post->link3);
+    
+            // Check if the URLs need modification before updating
+            if (
+                $post->link1 !== $modifiedUrl1 ||
+                $post->link2 !== $modifiedUrl2 ||
+                $post->link3 !== $modifiedUrl3
+            ) {
+                $post->link1 = $modifiedUrl1;
+                $post->link2 = $modifiedUrl2;
+                $post->link3 = $modifiedUrl3;
+                $post->update();
+            }
+        }
+        return $posts;
     }
 }

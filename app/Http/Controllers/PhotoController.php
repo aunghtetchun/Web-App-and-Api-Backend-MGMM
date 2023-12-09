@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Photo;
+use App\Aphoto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
@@ -60,6 +61,7 @@ class PhotoController extends Controller
         return redirect()->back()->with("toast","Background Change Successful");
     }
 
+
     public function store(Request $request)
     {
         $request->validate([
@@ -72,7 +74,7 @@ class PhotoController extends Controller
             $dir="public/post";
             foreach($request->file('images') as $image)
             {
-                $newName = uniqid()."_post.png";
+                $newName = uniqid()."_post.".$image->getClientOriginalExtension();;
 //                $image->storeAs($dir,$newName);
                 $image_resize = Image::make($image);
                 $image_resize->resize(530, null, function ($constraint) {
@@ -105,7 +107,7 @@ class PhotoController extends Controller
         elseif ($request->hasFile('images') && $request->account_id){
             foreach($request->file('images') as $image)
             {
-                $newName = uniqid()."_account.png";
+                $newName = uniqid()."_account.".$image->getClientOriginalExtension();;
                 $image_resize = Image::make($image);
                 $image_resize->resize(500, null, function ($constraint) {
                     $constraint->aspectRatio();
@@ -117,10 +119,25 @@ class PhotoController extends Controller
                 $photo->account_id=$request->account_id;
                 $photo->save();
         }}
+        elseif ($request->hasFile('images') && $request->adult_id){
+            foreach($request->file('images') as $image)
+            {
+                $newName = uniqid()."_adult.".$image->getClientOriginalExtension();;
+                $image_resize = Image::make($image);
+                $image_resize->resize(500, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                });
+                $image_resize->save(public_path('storage/adult/' .$newName));
+
+                $photo=new Aphoto();
+                $photo->name=$newName;
+                $photo->adult_id=$request->adult_id;
+                $photo->save();
+        }}
         else{
             foreach($request->file('images') as $image)
             {
-                $newName = uniqid()."_software.png";
+                $newName = uniqid()."_software.".$image->getClientOriginalExtension();
                 $image_resize = Image::make($image);
                 $image_resize->resize(530, null, function ($constraint) {
                     $constraint->aspectRatio();
@@ -190,6 +207,17 @@ class PhotoController extends Controller
             unlink(storage_path('/app/public/software/'.$photo->name));
         }
 //        unlink(storage_path('/app/public/thumbnail/'.$photo->name));
+        $photo->delete();
+        return redirect()->back()->with("toast","Photo Delete Successful");
+    }
+    
+    public function adestroy($id)
+    {
+        $photo=Aphoto::find($id);
+        if(isset($photo->adult_id)){
+        unlink(storage_path('/app/public/adult/'.$photo->name));
+
+        }
         $photo->delete();
         return redirect()->back()->with("toast","Photo Delete Successful");
     }

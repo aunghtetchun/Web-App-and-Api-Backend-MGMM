@@ -49,7 +49,7 @@
         <div class="col-12 pt-2 d-flex flex-wrap align-items-center">
 
             <div class="col-12">
-                <div class="card">
+                <div class="card shadow">
                     <div class="card-body">
                         <h5 class="card-title">{{ $game->name }} </h5>
                         <hr>
@@ -158,6 +158,12 @@
                     </div>
                     <div class="card-footer font-weight-bolder text-info text-center">
                         {{ $game->count }} ယောက် </span> ဒေါင်းထားပါတယ်
+                    </div>
+                </div>
+                <div class="card shadow mt-3 border border-success">
+                    <div class="card-body text-center">
+                        <h4 class="text-blue mb-2">Vpn မခံဘဲဒေါင်းရင်ပိုမြန်ပါတယ် </h4>
+                        <h4 class="text-blue"> Vpn ခံသုံးဖို့မလိုပါ</h4>
                     </div>
                 </div>
             </div>
@@ -293,7 +299,7 @@
                     <div class="responsive col-12 col-lg-9 px-0 mt-0 d-flex flex-wrap justify-content-center pb-3">
                         <h3 class="col-12 font-weight-bolder  text-center my-3">Similar Games</h3>
                         @foreach (App\Category::find($game->category_id)->posts()->inRandomOrder()->limit(8)->get() as $similar)
-                            <div class="card game_card px-1 col-3 col-lg col-md rounded-0"
+                            <div class="card shadow game_card px-1 col-3 col-lg col-md rounded-0"
                                 onclick="location.href='{{ route('game.singleGameList', $similar->slug) }}'"
                                 style="cursor: pointer;">
                                 <img class="card-img-top" src="{{ asset('/storage/logo/' . $similar->logo) }}"

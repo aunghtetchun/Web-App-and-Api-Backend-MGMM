@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Photo;
 use App\Adult;
+use App\Aphoto;
 use App\Traffic;
 use Faker\Provider\File;
 use Illuminate\Database\Eloquent\Model;
@@ -29,7 +30,7 @@ class AdultController extends Controller
         $adults=Adult::latest()->get();
         foreach ($adults as $g) {
             $logo = $g->logo;
-            $g->logo = "http://mgmm.pao666.net/storage/logo/". $logo;
+            $g->logo = asset("storage/alogo/" . $logo);
         }
         return view('adult.index',compact('adults'));
     }
@@ -92,7 +93,8 @@ class AdultController extends Controller
         }
         if ($request->hasFile('logo')){
             $dir="public/alogo";
-            $newName = uniqid() . "_alogo." . $image->getClientOriginalExtension();
+        
+            $newName = uniqid() . "_alogo." . $request->file('logo')->getClientOriginalExtension();
             $image_resize = Image::make($request->file("logo"));
             $image_resize->resize(100, null, function ($constraint) {
                 $constraint->aspectRatio();
@@ -112,7 +114,7 @@ class AdultController extends Controller
                     $constraint->aspectRatio();
                 });
                 $image_resize->save(public_path('storage/adult/' .$newName));
-                $photo=new Photo();
+                $photo=new Aphoto();
                 $photo->name=$newName;
                 $aa=Adult::get()->last();
                 $photo->adult_id=$aa->id;
@@ -203,7 +205,7 @@ class AdultController extends Controller
         }
         if ($request->hasFile('logo')){
             $dir="public/alogo";
-            $newName = uniqid() . "_alogo." . $image->getClientOriginalExtension();
+            $newName = uniqid() . "_alogo." . $request->file('logo')->getClientOriginalExtension();
             $image_resize = Image::make($request->file("logo"));
             $image_resize->resize(100, null, function ($constraint) {
                 $constraint->aspectRatio();
@@ -229,7 +231,7 @@ class AdultController extends Controller
             return redirect()->route("adult.index")->with("toast","ဒီဂိမ်းကိုသင်တင်ခဲ့တာမဟုတ်တဲ့အတွက်ဖျက်လို့မရနိုင်ပါဘူး");
         }else{
 
-        $old=Photo::where('adult_id',$adult->id)->get();
+        $old=Aphoto::where('adult_id',$adult->id)->get();
         // unlink(storage_path('/app/public/slogo/'.$adult->logo));
 //        unlink(storage_path('/app/public/thumbnail/'.$adult->logo));
 

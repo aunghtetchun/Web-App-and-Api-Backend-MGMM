@@ -127,6 +127,38 @@
         @else
             @component('component.nav-spacer')
             @endcomponent
+            @component('component.nav-title')
+            Website Management
+        @endcomponent
+
+        @component('component.nav-item')
+            @slot('icon')
+                <i class="fas fa-gamepad"></i>
+            @endslot
+            @slot('name')
+                Add Game
+            @endslot
+            @slot('link')
+                {{ route('scraper.addGame') }}
+            @endslot
+        @endcomponent
+
+        @component('component.nav-item-count')
+            @slot('icon')
+                <i class="feather-server"></i>
+            @endslot
+            @slot('name')
+                Game List
+            @endslot
+            @slot('link')
+                {{ route('scraper.gameList') }}
+            @endslot
+            @slot('count')
+                {{ \App\Post::whereNotNull('crawl_url')->count() }}
+            @endslot
+        @endcomponent
+        @component('component.nav-spacer')
+        @endcomponent
 
             @component('component.nav-title')
                 Game Management

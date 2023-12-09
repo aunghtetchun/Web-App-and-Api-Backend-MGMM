@@ -34,7 +34,10 @@ class ApiController extends ResponseController
         $messages = Message::where('user_id', $user->id)->latest()->get();
         foreach ($games as $g) {
             $logo = $g->logo;
-            $g->logo = asset("storage/logo/" . $logo);
+            if(!$g->crawl_url){
+                $g->logo = "https://modgamesmm.com/storage/logo/"  . $logo;
+            }
+
         }
         $user->games = $games;
         $user->messages = $messages;
@@ -122,7 +125,10 @@ class ApiController extends ResponseController
             $games = Post::with('getCategory')->orderBy('created_at')->limit(20)->get();
             foreach ($games as $g) {
                 $logo = $g->logo;
-                $g->logo = asset("storage/logo/" . $logo);
+                if(!$g->crawl_url){
+                $g->logo ="https://modgamesmm.com/storage/logo/"  . $logo;
+                }
+                
                 $g->category = $g->getCategory()->first('title')->title;
             }
             return response()->json([
@@ -143,11 +149,19 @@ class ApiController extends ResponseController
         try {
             $game = Post::where('slug', $request->slug)->with('getCategory')->with('getComment')->with('categories:post_id,title')->first();
             $logo = $game->logo;
-            $game->logo = asset("storage/logo/" . $logo);
+            if(!$game->crawl_url){
+                $game->logo ="https://modgamesmm.com/storage/logo/"  . $logo; 
+                $game->photos = array_map(function ($photo) {
+                    return "https://modgamesmm.com/storage/post/" . $photo["name"];
+                }, $game->getPhoto()->get()->toArray());
+            }else{
+                $game->photos = array_map(function ($photo) {
+                    return $photo["name"];
+                }, $game->getPhoto()->get()->toArray());
+            }
+            
             $game->username = $game->getUser->name;
-            $game->photos = array_map(function ($photo) {
-                return asset("storage/post/" . $photo["name"]);
-            }, $game->getPhoto()->get()->toArray());
+           
             $game->category = $game->getCategory()->first('title')->title;
             $game->addHidden(["getPhoto"]);
             return response()->json([
@@ -169,7 +183,10 @@ class ApiController extends ResponseController
             $related_games = Post::where('category_id', $request->id)->limit(8)->inRandomOrder()->get();
             foreach ($related_games as $g) {
                 $logo = $g->logo;
-                $g->logo = asset("storage/logo/" . $logo);
+                if(!$g->crawl_url){
+                $g->logo = "https://modgamesmm.com/storage/logo/"  . $logo;
+                }
+                
             }
             return response()->json([
                 'result' => 1,
@@ -187,11 +204,14 @@ class ApiController extends ResponseController
     public function getAllGames()
     {
         try {
-            $title = 'All';
+            $title = 'All.';
             $games = Post::where('category_id', '!=', '20')->orderBy('updated_at', 'desc')->paginate(15);
             foreach ($games as $g) {
                 $logo = $g->logo;
-                $g->logo = asset("storage/logo/" . $logo);
+                if(!$g->crawl_url){
+                $g->logo = "https://modgamesmm.com/storage/logo/" . $logo;
+                }
+                
                 $g->category = $g->getCategory()->first('title')->title;
             }
             return response()->json([
@@ -215,7 +235,10 @@ class ApiController extends ResponseController
             $games = Category::find($category_id)->posts()->orderBy('updated_at', 'desc')->paginate(15);
             foreach ($games as $g) {
                 $logo = $g->logo;
-                $g->logo = asset("storage/logo/" . $logo);
+                if(!$g->crawl_url){
+                $g->logo = "https://modgamesmm.com/storage/logo/" . $logo;
+                }
+                
                 $g->category = $g->getCategory()->first('title')->title;
             }
             return response()->json([
@@ -239,7 +262,10 @@ class ApiController extends ResponseController
             $games = Post::where('keywords', 'LIKE', "%{$search_value}%")->latest()->paginate(20);
             foreach ($games as $g) {
                 $logo = $g->logo;
-                $g->logo = asset("storage/logo/" . $logo);
+                if(!$g->crawl_url){
+                                $g->logo = "https://modgamesmm.com/storage/logo/" . $logo;
+                }
+
             }
             return response()->json([
                 'result' => 1,
@@ -372,7 +398,10 @@ class ApiController extends ResponseController
             $softwares = Software::orderBy('updated_at', 'desc')->paginate(20);
             foreach ($softwares as $g) {
                 $logo = $g->logo;
-                $g->logo = asset("storage/slogo/" . $logo);
+                if(!$g->crawl_url){
+                $g->logo = "https://modgamesmm.com/storage/slogo/" . $logo;
+                }
+                
             }
             return response()->json([
                 'result' => 1,
@@ -393,10 +422,10 @@ class ApiController extends ResponseController
         try {
             $software = Software::where('slug', $slug)->first();
             $logo = $software->logo;
-            $software->logo = asset("storage/slogo/" . $logo);
+            $software->logo = "https://modgamesmm.com/storage/slogo/" . $logo;
             $software->username = $software->getUser->name;
             $software->photos = array_map(function ($photo) {
-                return asset("storage/software/" . $photo["name"]);
+                return "https://modgamesmm.com/storage/software/"  . $photo["name"];
             }, $software->getPhoto()->get()->toArray());
             $software->addHidden(["getPhoto"]);
             return response()->json([
@@ -419,7 +448,7 @@ class ApiController extends ResponseController
             $softwares = Software::where('name', 'LIKE', "%{$search_value}%")->orderBy('name')->paginate(20);
             foreach ($softwares as $g) {
                 $logo = $g->logo;
-                $g->logo = asset("storage/slogo/" . $logo);
+                $g->logo = "https://modgamesmm.com/storage/slogo/"  . $logo;
             }
             return response()->json([
                 'result' => 1,
@@ -441,7 +470,7 @@ class ApiController extends ResponseController
             $adults = Adult::orderBy('updated_at', 'desc')->paginate(15);
             foreach ($adults as $g) {
                 $logo = $g->logo;
-                $g->logo = "http://mgmm.pao666.net/storage/logo/". $logo;
+                $g->logo = "https://modgamesmm.com/storage/logo/"  . $logo;
             }
             return response()->json([
                 'result' => 1,
@@ -462,10 +491,10 @@ class ApiController extends ResponseController
         try {
             $adult = Adult::where('slug', $slug)->first();
             $logo = $adult->logo;
-            $adult->logo = "http://mgmm.pao666.net/storage/logo/".$logo;
-            $adult->username = "Thura Min Htin";
-            $adult->photos = array_map(function ($photo) {
-                return "http://mgmm.pao666.net/storage/post/".$photo["name"];
+            $adult->logo = "https://modgamesmm.com/storage/alogo/"  . $logo;
+            $adult->username = $adult->getUser->name;
+            $adult->photos =  array_map(function ($photo) {
+                return "https://modgamesmm.com/storage/adult/" . $photo["name"];
             }, $adult->getPhoto()->get()->toArray());
             $adult->addHidden(["getPhoto"]);
             return response()->json([
@@ -488,7 +517,7 @@ class ApiController extends ResponseController
             $adults = Adult::where('name', 'LIKE', "%{$search_value}%")->latest()->paginate(20);
             foreach ($adults as $g) {
                 $logo = $g->logo;
-                $g->logo = "http://mgmm.pao666.net/storage/logo/". $logo;
+                $g->logo = "https://mgmm.pao666.net/storage/logo/". $logo;
             }
             return response()->json([
                 'result' => 1,
@@ -507,10 +536,10 @@ class ApiController extends ResponseController
     public function getAllAccounts()
     {
         try {
-            $accounts = Account::orderBy('updated_at', 'desc')->paginate(15);
+            $accounts = Account::orderBy('updated_at', 'desc')->paginate(20);
             foreach ($accounts as $g) {
                 $profile = $g->profile;
-                $g->profile = asset("storage/profile/" . $profile);
+                $g->profile = "https://modgamesmm.com/storage/profile/" . $profile;
             }
             return response()->json([
                 'result' => 1,
@@ -531,12 +560,12 @@ class ApiController extends ResponseController
         try {
             $account = Account::where('id', $id)->first();
             $profile = $account->profile;
-            $account->profile = asset("storage/profile/" . $profile);
+            $account->profile = "https://modgamesmm.com/storage/profile/"  . $profile;
             $account->skins = array_map(function ($photo) {
                 return "https://modgamesmm.com/storage/skin/".$photo["url"];
             }, $account->skins()->get()->toArray());
             $account->photos = array_map(function ($photo) {
-                return asset("storage/skins/" . $photo["name"]);
+                return "https://modgamesmm.com/storage/skins/"  . $photo["name"];
             }, $account->getPhoto()->get()->toArray());
             return response()->json([
                 'result' => 1,
@@ -558,7 +587,7 @@ class ApiController extends ResponseController
             $accounts = Account::where('name', 'LIKE', "%{$search_value}%")->latest()->paginate(20);
             foreach ($accounts as $g) {
                 $profile = $g->profile;
-                $g->profile =asset("storage/profile/" . $profile);
+                $g->profile ="https://modgamesmm.com/storage/profile/" . $profile;
             }
             return response()->json([
                 'result' => 1,
@@ -619,7 +648,7 @@ class ApiController extends ResponseController
 
         try {
             if ($id == 10) {
-                return redirect('http://mgmm.pao666.net/game/' . $id);
+                return redirect('https://mgmm.pao666.net/game/' . $id);
             } else {
                 $c_name = Category::where('id', $id)->first()->title;
                 $title = $c_name . ' ဂိမ်းများs';

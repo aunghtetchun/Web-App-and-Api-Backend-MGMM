@@ -19,21 +19,21 @@
 
 <?php $__currentLoopData = $game->getPhoto; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $photo): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
     <?php $__env->startSection('og_image'); ?>
-        <?php echo e(asset('storage/post/' . $photo->name)); ?>
+        <?php echo e(isset($game->crawl_url)?$photo->name : asset('storage/post/' . $photo->name)); ?>
 
     <?php $__env->stopSection(); ?>
 <?php break; ?>
 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 <?php $__env->startSection('twt_image'); ?>
-<?php echo e(asset('storage/logo/' . $game->logo)); ?>
+<?php echo e(isset($game->crawl_url)?$game->logo : asset('storage/logo/' . $game->logo)); ?>
 
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('meta_icon'); ?>
-<?php echo e(asset('storage/logo/' . $game->logo)); ?>
+<?php echo e(isset($game->crawl_url)?$game->logo : asset('storage/logo/' . $game->logo)); ?>
 
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('lg_logo'); ?>
-<?php echo e(asset('storage/logo/' . $game->logo)); ?>
+<?php echo e(isset($game->crawl_url)?$game->logo : asset('storage/logo/' . $game->logo)); ?>
 
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('title'); ?>
@@ -127,7 +127,7 @@ endif; ?>"
         <div class="d-flex col-12 flex-wrap align-items-start justify-content-center">
             <div class="col-3 col-md-2 col-xs-12 col-md-2 px-1 my-3 border pt-1 border-danger bg-light"
                 style="border: 2px solid; color: rgb(6 28 116); ">
-                <img src="<?php echo e(asset('/storage/logo/' . $game->logo)); ?>" style="width: 100%;  margin-bottom: 5px;"
+                <img src="<?php echo e(isset($game->crawl_url)?$game->logo :  asset('/storage/logo/' . $game->logo)); ?>" style="width: 100%;  margin-bottom: 5px;"
                     alt="">
             </div>
             <div class="col-9 col-md-12 px-0">
@@ -271,8 +271,8 @@ endif; ?>
                     <?php $__currentLoopData = $game->getPhoto; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $photo): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <div class="px-lg-1 px-md-1 px-0">
                             <a class="venobox" data-gall="myGallery"
-                                href="<?php echo e(asset('/storage/post/' . $photo->name)); ?>">
-                                <img class="w-100" src="<?php echo e(asset('/storage/post/' . $photo->name)); ?>"
+                                href="<?php echo e(isset($game->crawl_url)?$photo->name : asset('/storage/post/' . $photo->name)); ?>">
+                                <img class="w-100" src="<?php echo e(isset($game->crawl_url)?$photo->name :  asset('/storage/post/' . $photo->name)); ?>"
                                     alt="">
                             </a>
                         </div>
@@ -372,7 +372,7 @@ endif; ?>
                         <div class="card col-3 col-lg col-md game_card px-1 rounded-0"
                             onclick="location.href='<?php echo e(route('game.singleGameList', $similar->slug)); ?>'"
                             style="cursor: pointer; min-height: 141px;">
-                            <img class="card-img-top" src="<?php echo e(asset('/storage/logo/' . $similar->logo)); ?>"
+                            <img class="card-img-top" src="<?php echo e(isset($similar->crawl_url)?$similar->logo :  asset('/storage/logo/' . $similar->logo)); ?>"
                                 alt="Card image cap"
                                 style="width: 100%; border-radius:13px; min-height: 76px;  max-height: 85px; padding: 2px;">
                             <div class="card-body pt-1 pb-2" style="padding: 13px">

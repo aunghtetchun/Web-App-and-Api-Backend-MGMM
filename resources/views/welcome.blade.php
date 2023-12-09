@@ -18,7 +18,7 @@
                     <p class="mt-2 mb-0 px-0">( <span class="text-danger"> X </span>လောင်းကစားကြော်ငြာများလက်မခံပါ <span
                             class="text-danger"> X </span> )</p>
                 </div>
-                <div class="py-0 ">
+                <div class="py-0 text-danger"> 
                     <div class="d-none d-md-block">
                         <h5 class="mt-3 mt-md-1 font-weight-bold px-0" style="line-height: 39px">ကြော်ငြာနှင့် Website
                             အပ်လိုပါက </h5>
@@ -27,7 +27,7 @@
                         <p class="mt-2 mb-0 px-0">( <span class="text-danger"> X </span>လောင်းကစားကြော်ငြာများလက်မခံပါ <span
                                 class="text-danger"> X </span> )</p>
                     </div>
-                    <img src="https://i.ibb.co/k8pMx2w/Screenshot-from-2023-10-02-14-40-57.png"
+                    <img src="https://i.ibb.co/pJFXBK5/Screenshot-from-2023-12-04-20-46-54.png"
                         class="w-100 d-block d-md-none h-100" alt="">
                 </div>
                 <div class="py-0">
@@ -39,7 +39,7 @@
                         <p class="mt-2 mb-0 px-0">( <span class="text-danger"> X </span>လောင်းကစားကြော်ငြာများလက်မခံပါ <span
                                 class="text-danger"> X </span> )</p>
                     </div>
-                    <img src="https://i.ibb.co/k8pMx2w/Screenshot-from-2023-10-02-14-40-57.png"
+                    <img src="https://i.ibb.co/pJFXBK5/Screenshot-from-2023-12-04-20-46-54.png"
                         class="w-100 d-block d-md-none h-100" alt="">
                 </div>
             </div>
@@ -71,7 +71,7 @@
 
                                         </div> -->
                         <div class="col-3 pl-2 pr-2 py-2 rounded">
-                            <img class="p-0  px-0 pt-0 cropped" src="{{ asset('/storage/logo/' . $post->logo) }}"
+                            <img class="p-0  px-0 pt-0 cropped" src="{{isset($post->crawl_url)?$post->logo : asset('/storage/logo/' . $post->logo) }}"
                                 alt="Card image cap"
                                 onclick="location.href='{{ route('game.singleGameList', $post->slug) }}'"
                                 style="border-radius:0.5rem!important; ">

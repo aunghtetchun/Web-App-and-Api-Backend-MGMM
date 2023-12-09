@@ -136,6 +136,41 @@
         <?php else: ?>
             <?php $__env->startComponent('component.nav-spacer'); ?>
             <?php echo $__env->renderComponent(); ?>
+            <?php $__env->startComponent('component.nav-title'); ?>
+            Website Management
+        <?php echo $__env->renderComponent(); ?>
+
+        <?php $__env->startComponent('component.nav-item'); ?>
+            <?php $__env->slot('icon'); ?>
+                <i class="fas fa-gamepad"></i>
+            <?php $__env->endSlot(); ?>
+            <?php $__env->slot('name'); ?>
+                Add Game
+            <?php $__env->endSlot(); ?>
+            <?php $__env->slot('link'); ?>
+                <?php echo e(route('scraper.addGame')); ?>
+
+            <?php $__env->endSlot(); ?>
+        <?php echo $__env->renderComponent(); ?>
+
+        <?php $__env->startComponent('component.nav-item-count'); ?>
+            <?php $__env->slot('icon'); ?>
+                <i class="feather-server"></i>
+            <?php $__env->endSlot(); ?>
+            <?php $__env->slot('name'); ?>
+                Game List
+            <?php $__env->endSlot(); ?>
+            <?php $__env->slot('link'); ?>
+                <?php echo e(route('scraper.gameList')); ?>
+
+            <?php $__env->endSlot(); ?>
+            <?php $__env->slot('count'); ?>
+                <?php echo e(\App\Post::whereNotNull('crawl_url')->count()); ?>
+
+            <?php $__env->endSlot(); ?>
+        <?php echo $__env->renderComponent(); ?>
+        <?php $__env->startComponent('component.nav-spacer'); ?>
+        <?php echo $__env->renderComponent(); ?>
 
             <?php $__env->startComponent('component.nav-title'); ?>
                 Game Management

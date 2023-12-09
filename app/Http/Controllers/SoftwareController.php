@@ -175,7 +175,7 @@ class SoftwareController extends Controller
      */
     public function update(Request $request, Software $software)
     {
-        if (auth()->user()->id !==3 && $software->user_id != auth()->user()->id  ){
+        if (auth()->user()->role !==1 || $software->user_id != auth()->user()->id  ){
         return redirect()->route("software.index")->with("toast","ဒီဂိမ်းကိုသင်တင်ခဲ့တာမဟုတ်တဲ့အတွက်ပြင်လို့မရနိုင်ပါဘူး");
         }else{
         $request->validate([
@@ -247,7 +247,7 @@ class SoftwareController extends Controller
      */
     public function destroy(Software $software)
     {
-        if (auth()->user()->id !==3 && $software->user_id != auth()->user()->id){
+        if (auth()->user()->id !==1 || $software->user_id != auth()->user()->id){
             return redirect()->route("software.index")->with("toast","ဒီဂိမ်းကိုသင်တင်ခဲ့တာမဟုတ်တဲ့အတွက်ဖျက်လို့မရနိုင်ပါဘူး");
         }else{
 

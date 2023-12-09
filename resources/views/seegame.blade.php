@@ -21,18 +21,18 @@
 {{-- @section('og_image'){{ asset('storage/logo/' . $game->logo) }}@endsection --}}
 @foreach ($game->getPhoto as $photo)
     @section('og_image')
-        {{ asset('storage/post/' . $photo->name) }}
+        {{ isset($game->crawl_url)?$photo->name : asset('storage/post/' . $photo->name) }}
     @endsection
 @break
 @endforeach
 @section('twt_image')
-{{ asset('storage/logo/' . $game->logo) }}
+{{ isset($game->crawl_url)?$game->logo : asset('storage/logo/' . $game->logo) }}
 @endsection
 @section('meta_icon')
-{{ asset('storage/logo/' . $game->logo) }}
+{{ isset($game->crawl_url)?$game->logo : asset('storage/logo/' . $game->logo) }}
 @endsection
 @section('lg_logo')
-{{ asset('storage/logo/' . $game->logo) }}
+{{ isset($game->crawl_url)?$game->logo : asset('storage/logo/' . $game->logo) }}
 @endsection
 @section('title')
 MGMM {{ $game->name }}
@@ -120,7 +120,7 @@ MGMM {{ $game->name }}
         <div class="d-flex col-12 flex-wrap align-items-start justify-content-center">
             <div class="col-3 col-md-2 col-xs-12 col-md-2 px-1 my-3 border pt-1 border-danger bg-light"
                 style="border: 2px solid; color: rgb(6 28 116); ">
-                <img src="{{ asset('/storage/logo/' . $game->logo) }}" style="width: 100%;  margin-bottom: 5px;"
+                <img src="{{isset($game->crawl_url)?$game->logo :  asset('/storage/logo/' . $game->logo) }}" style="width: 100%;  margin-bottom: 5px;"
                     alt="">
             </div>
             <div class="col-9 col-md-12 px-0">
@@ -288,8 +288,8 @@ MGMM {{ $game->name }}
                     @foreach ($game->getPhoto as $photo)
                         <div class="px-lg-1 px-md-1 px-0">
                             <a class="venobox" data-gall="myGallery"
-                                href="{{ asset('/storage/post/' . $photo->name) }}">
-                                <img class="w-100" src="{{ asset('/storage/post/' . $photo->name) }}"
+                                href="{{ isset($game->crawl_url)?$photo->name : asset('/storage/post/' . $photo->name) }}">
+                                <img class="w-100" src="{{isset($game->crawl_url)?$photo->name :  asset('/storage/post/' . $photo->name) }}"
                                     alt="">
                             </a>
                         </div>
@@ -407,7 +407,7 @@ MGMM {{ $game->name }}
                         <div class="card col-3 col-lg col-md game_card px-1 rounded-0"
                             onclick="location.href='{{ route('game.singleGameList', $similar->slug) }}'"
                             style="cursor: pointer; min-height: 141px;">
-                            <img class="card-img-top" src="{{ asset('/storage/logo/' . $similar->logo) }}"
+                            <img class="card-img-top" src="{{isset($similar->crawl_url)?$similar->logo :  asset('/storage/logo/' . $similar->logo) }}"
                                 alt="Card image cap"
                                 style="width: 100%; border-radius:13px; min-height: 76px;  max-height: 85px; padding: 2px;">
                             <div class="card-body pt-1 pb-2" style="padding: 13px">

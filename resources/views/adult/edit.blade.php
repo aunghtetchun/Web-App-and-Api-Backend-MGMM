@@ -37,7 +37,7 @@
                                         @enderror
                                     </div>                                    
                                     <div class="form-group d-flex flex-wrap mb-0">
-                                        {{-- <div class="form-group col-md-6 pl-lg-0 pl-md-0">
+                                         <div class="form-group col-md-6 pl-lg-0 pl-md-0">
                                             <div class="form-group justify-content-center align-items-center">
                                                 <label for="logo" class="">Adult Logo</label>
                                                 <input type="file" accept="image/png, .jpeg, .jpg, image/gif,image/webp" class="form-control d-none  p-1 @error('logo') is-invalid @enderror" name="logo" id="logo" value="{{old('logo')}}" placeholder="Ads Logo" onchange="readURL(this);">
@@ -49,9 +49,9 @@
                                                 <a onclick="$('#logo').trigger('click');" class="btn text-white btn-primary btn-sm" style="position:absolute; right: 22px; top: 42px">
                                                     <i class="fas fa-edit "></i>
                                                 </a>
-                                                <img id="blah" onclick="$('#logo').trigger('click');" class="w-100 rounded" src="{{ asset("/storage/logo/".$adult->logo)}}" alt="your image" />
+                                                <img id="blah" onclick="$('#logo').trigger('click');" class="w-100 rounded" src="{{ asset("/storage/alogo/".$adult->logo)}}" alt="your image" />
                                             </div>
-                                        </div> --}}
+                                        </div> 
                                         <div class="col-md-6 pl-lg-0 pl-md-0 ">
                                             <div class="form-group">
                                                 <label for="type">Adult Type</label>
@@ -197,11 +197,53 @@
                 @endslot
             @endcomponent
         </div>
+        <div class="col-12 col-md-6">
+            @component("component.card")
+                @slot('icon') <i class="feather-file text-primary"></i> @endslot
+                @slot('title') Adult Game Photo @endslot
+                @slot('button')
+
+                @endslot
+                @slot('body')
+                    <form action="{{ route('photo.store') }}" method="post" enctype="multipart/form-data">
+                        @csrf
+                        <input type="hidden" value="{{ $adult->id }}" name="adult_id">
+                        <div class="form-group input-field">
+{{--                            <label class="active" for="images">Adult Photos</label>--}}
+                            <div class="input-images-1" style="padding-top: .5rem;"></div>
+                            {{--                                        <input required type="file" accept="image/png, .jpeg, .jpg, image/gif" multiple class="input-images-1 p-1 form-control @error('images') is-invalid @enderror" name="images[]" id="images" value="{{old('images')}}" style="padding-top: .5rem;">--}}
+                            @error('images')
+                            <small class="invalid-feedback font-weight-bold" role="alert">
+                                {{ $message }}
+                            </small>
+                            @enderror
+                        </div>
+                        <button type="submit" class="btn btn-primary " ><i class="fas fa-plus-square mr-1"></i> Upload Photos</button>
+
+                    </form>
+                    <div class="d-flex mt-3" style="overflow-x: scroll;" >
+                        @foreach($adult->getPhoto as $photo)
+                            <div class="mr-2" >
+                                <img src="{{ asset("/storage/adult/".$photo->name) }}" alt="" >
+                                <form action="{{ route('aphoto.destroy',$photo->id) }}"  method="post">
+                                    @csrf
+                                    @method("DELETE")
+                                    <button onClick="return confirm('Are you sure you want to delete?')" class="btn  btn-sm btn-danger text-left" style="margin-top: -330px; margin-left: 8px">
+                                        <i class="feather-trash-2"></i>
+                                    </button>
+                                </form>
+                            </div>
+
+                        @endforeach
+                    </div>
+                @endslot
+            @endcomponent
+        </div>
     </div>
 @endsection
 @section('foot')
     <script>
-        $('.input-images-1').imageUploader();
+         $('.input-images-1').imageUploader();
         $('#description').summernote({
             height: 200,                 // set editor height
             minHeight: null,             // set minimum height of editor

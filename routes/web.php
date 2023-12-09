@@ -33,7 +33,7 @@ Route::group(['middleware' => ['auth', 'verify.admin']], function () {
   Route::resource('/popular', 'PopularController');
   Route::get('/review', 'PostController@reviewFilter')->name('post.reviewFilter');
   Route::get('/noreview', 'PostController@noreviewFilter')->name('post.noreviewFilter');
-  //Route::get('/drive','PostController@driveFilter')->name('post.driveFilter');
+  Route::get('/apkaward','PostController@apkaward')->name('post.apkaward');
   //Route::get('/nodrive','PostController@nodriveFilter')->name('post.nodriveFilter');
   Route::get('/mod', 'PostController@modFilter')->name('post.modFilter');
   Route::get('/nomod', 'PostController@noModFilter')->name('post.noModFilter');
@@ -55,6 +55,17 @@ Route::group(['middleware' => ['auth', 'verify.admin']], function () {
   Route::get('/user-list', 'HomeController@userList')->name('user.userList');
   Route::post('/send-message', 'HomeController@sendMessage')->name('user.sendMessage');
   Route::get('/message-list', 'HomeController@messageList')->name('user.messageList');
+  Route::delete('/aphoto/{id}', 'PhotoController@adestroy')->name('aphoto.destroy');
+
+
+
+  //crawler
+  Route::get('/crawler/add-game','ScraperController@addGame')->name('scraper.addGame');
+  Route::get('/crawler/game-list','ScraperController@gameList')->name('scraper.gameList');
+  Route::post('/crawler/store-game','ScraperController@storeGame')->name('scraper.storeGame');
+  Route::get('/crawler/test','ScraperController@test2')->name('scraper.test2');
+  Route::get('/crawler/update-game','ScraperController@updateGame')->name('scraper.updateGame');
+
 });
 //Route::get('/ads.txt', function() {
 //  return File::get(public_path() . '/ads.txt');
@@ -62,10 +73,6 @@ Route::group(['middleware' => ['auth', 'verify.admin']], function () {
 // Route::get('/privacy-policy.html', function() {
 //     return File::get(public_path() . '/privacy-policy.html');
 // });
-
-// Route::get('/testing','HomeController@testing');
-
-// Route::get('stock/chart','HomeController@chart');
 
 Route::post('/report', 'GameController@reportBrokenLink')->name('reportBrokenLink');
 Route::get('/request_game/create', 'GameController@createRequest')->name('requestGame.createRequest');

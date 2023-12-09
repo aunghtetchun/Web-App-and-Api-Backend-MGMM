@@ -18,7 +18,7 @@ class GameController extends Controller
 {
     public function popular(){
 //        return 'hello';
-        $posts=Post::orderBy('updated_at','desc')->limit(12)->get();
+        $posts=Post::orderBy('updated_at','desc')->limit(15)->get();
         // $posts=Post::select('*')
         // ->leftJoin('viewers', 'posts.id', '=', 'viewers.post_id')
         // ->orderBy('viewers.count', 'DESC')
@@ -28,7 +28,7 @@ class GameController extends Controller
     }
     public function gameList(Request $request){
         $title='ဂိမ်းအားလုံး';
-        $games=Post::orderBy('updated_at','desc')->paginate(9);
+        $games=Post::orderBy('updated_at','desc')->paginate(15);
         return view('games',compact('games','title'));
     }
     public function gameListFilter($id){
@@ -50,7 +50,7 @@ class GameController extends Controller
         }else{
             $count=0;
         }
-        $randomNumber = random_int(1, 9);
+        $randomNumber = random_int(1, 29);
 
         Post::updateOrCreate(['id'=>$id],
         ['count'=>$count + $randomNumber]
@@ -66,7 +66,7 @@ class GameController extends Controller
         }else{
             $count=0;
         }
-        $randomNumber = random_int(1, 9);
+        $randomNumber = random_int(1, 29);
 
         Post::updateOrCreate(['slug'=>$slug],
         ['count'=>$count + $randomNumber]
@@ -229,7 +229,7 @@ class GameController extends Controller
 
             public function softwareList(){
                 $title='Software အားလုံး';
-                $softwares=Software::orderBy('description','asc')->paginate(12);
+                $softwares=Software::orderBy('description','asc')->paginate(15);
                 return view('softwares',compact('softwares','title'));
             }
      
@@ -241,7 +241,7 @@ class GameController extends Controller
                 }else{
                     $count=0;
                 }
-                $randomNumber = random_int(1, 9);
+                $randomNumber = random_int(1, 29);
                 Software::updateOrCreate(['slug'=>$slug],
                 ['count'=>$count + $randomNumber]
               );
